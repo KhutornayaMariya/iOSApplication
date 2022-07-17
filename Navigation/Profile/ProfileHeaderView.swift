@@ -72,7 +72,7 @@ final class ProfileHeaderView: UIView {
     }
 
     private func setUp() {
-        backgroundColor = .lightGray
+        backgroundColor = .white
         let subviews = [userName, userImage, statusButton, inputField]
         subviews.forEach { addSubview($0) }
 
@@ -86,6 +86,7 @@ final class ProfileHeaderView: UIView {
             statusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .safeArea),
             statusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.safeArea),
             statusButton.heightAnchor.constraint(equalToConstant: 50),
+            statusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.safeArea),
 
             userName.topAnchor.constraint(equalTo: topAnchor, constant: 27),
             userName.leadingAnchor.constraint(equalTo: userImage.trailingAnchor, constant: .safeArea),
@@ -104,6 +105,7 @@ final class ProfileHeaderView: UIView {
             print("Nothing to show")
             return
         }
+        inputField.endEditing(true)
         print(status)
     }
 }
