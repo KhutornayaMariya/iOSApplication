@@ -16,14 +16,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: scene)
         
-        let profileViewController = UINavigationController(rootViewController: ProfileViewController(.darkGray, "Profile"))
+        let profileViewController = UINavigationController(rootViewController: ProfileViewController(.white, "Profile"))
         profileViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "house"), selectedImage: nil)
-        
+        profileViewController.navigationBar.backgroundColor = .white
+
         let feedViewController = UINavigationController()
         feedViewController.pushViewController(FeedViewController(.cyan, "News", parent: feedViewController), animated: false)
         feedViewController.tabBarItem = UITabBarItem(title: "News", image: UIImage(systemName: "doc"), selectedImage: nil)
-        
-        window.rootViewController = TabBarController(viewControllers: [feedViewController, profileViewController])
+
+        let tabBarVc = TabBarController(viewControllers: [feedViewController, profileViewController])
+        tabBarVc.tabBar.backgroundColor = .white
+        window.rootViewController = tabBarVc
         window.makeKeyAndVisible()
         self.window = window
     }
