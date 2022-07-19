@@ -1,2 +1,2 @@
 # iOSApplication
-# iosui-diplom
+# netology education
