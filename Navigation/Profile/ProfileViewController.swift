@@ -11,10 +11,8 @@ final class ProfileViewController: UIViewController {
 
     var backgroundColor: UIColor = .lightGray
 
-    init(_ color: UIColor, _ title: String) {
+    init() {
         super.init(nibName: nil, bundle: nil)
-        backgroundColor = color
-        self.title = title
     }
 
     private lazy var headerView: ProfileHeaderView = {
@@ -39,6 +37,7 @@ final class ProfileViewController: UIViewController {
     }
 
     private func setUp() {
+        title = "Profile"
         view.backgroundColor = backgroundColor
         view.addSubview(headerView)
 
