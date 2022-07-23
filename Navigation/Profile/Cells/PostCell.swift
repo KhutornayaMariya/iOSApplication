@@ -79,6 +79,7 @@ final class PostCell: UITableViewCell {
     }
 
     private func setup() {
+        backgroundColor = .white
         let subviews = [title, image, desc, likes, views]
         subviews.forEach { addSubview($0) }
         let screenWidth = UIScreen.main.bounds.size.width

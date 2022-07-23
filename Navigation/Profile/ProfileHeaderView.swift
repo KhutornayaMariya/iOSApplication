@@ -9,6 +9,8 @@ import UIKit
 
 final class ProfileHeaderView: UIView {
 
+    private var statusText: String = "Hi everyone"
+
     private lazy var userName: UILabel = {
         let view = UILabel()
 
@@ -51,13 +53,30 @@ final class ProfileHeaderView: UIView {
         return view
     }()
 
+    private lazy var statusLabel: UILabel = {
+        let view = UILabel()
+
+        view.text = statusText
+        view.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        view.textColor = .gray
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        return view
+    }()
+
     private lazy var inputField: UITextField = {
         let view = UITextField()
 
-        view.placeholder = "Waiting for something"
-        view.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        view.tintColor = .gray
+        view.placeholder = "What is your mood?"
+        view.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        view.textColor = .black
+        view.backgroundColor = .white
+        view.textAlignment = .left
+        view.layer.cornerRadius = 12
+        view.layer.borderColor = UIColor.black.cgColor
+        view.layer.borderWidth = 1
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
 
         return view
     }()
@@ -72,8 +91,8 @@ final class ProfileHeaderView: UIView {
     }
 
     private func setUp() {
-        backgroundColor = .white
-        let subviews = [userName, userImage, statusButton, inputField]
+        backgroundColor = .clear
+        let subviews = [userName, userImage, statusButton, inputField, statusLabel]
         subviews.forEach { addSubview($0) }
 
         NSLayoutConstraint.activate([
@@ -92,21 +111,30 @@ final class ProfileHeaderView: UIView {
             userName.leadingAnchor.constraint(equalTo: userImage.trailingAnchor, constant: .safeArea),
             userName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.safeArea),
 
-            inputField.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -34),
+            statusLabel.bottomAnchor.constraint(equalTo: inputField.topAnchor, constant: -5),
+            statusLabel.leadingAnchor.constraint(equalTo: userImage.trailingAnchor, constant: .safeArea),
+            statusLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.safeArea),
+
+            inputField.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -.safeArea),
             inputField.leadingAnchor.constraint(equalTo: userImage.trailingAnchor, constant: .safeArea),
-            inputField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.safeArea)
+            inputField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.safeArea),
+            inputField.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
 
     @objc
     private func onButtonTapHander() {
-        guard let status = inputField.text,
-           !status.isEmpty else {
-            print("Nothing to show")
+        statusLabel.text = statusText
+        inputField.text = ""
+        inputField.endEditing(true)
+    }
+
+    @objc
+    private func statusTextChanged(_ textField: UITextField) {
+        guard let text = textField.text else {
             return
         }
-        inputField.endEditing(true)
-        print(status)
+        statusText = text
     }
 }
 
