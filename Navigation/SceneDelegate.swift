@@ -18,7 +18,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let profileViewController = UINavigationController(rootViewController: LogInViewController())
         profileViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "house"), selectedImage: nil)
-        profileViewController.navigationBar.isHidden = true
 
         let feedViewController = UINavigationController()
         feedViewController.pushViewController(FeedViewController(.cyan, "News", parent: feedViewController), animated: false)

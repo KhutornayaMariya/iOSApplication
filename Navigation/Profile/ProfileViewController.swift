@@ -29,6 +29,7 @@ final class ProfileViewController: UIViewController {
         view.backgroundColor = .clear
 
         view.register(PostCell.self, forCellReuseIdentifier: String(describing: PostCell.self))
+        view.register(PhotosTableViewCell.self, forCellReuseIdentifier: String(describing: PhotosTableViewCell.self))
 
         return view
     }()
@@ -82,31 +83,57 @@ final class ProfileViewController: UIViewController {
     }
 }
 
-extension ProfileViewController: UITableViewDelegate { }
+extension ProfileViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case .photoGallerySection:
+            navigationController?.pushViewController(PhotosViewController(), animated: true)
+        default:
+            break
+        }
+    }
+}
 
 extension ProfileViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataItems.count
+        switch section {
+        case .photoGallerySection:
+            return 1
+        default:
+            return dataItems.count
+        }
     }
 
-
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostCell.self), for: indexPath) as! PostCell
-        cell.configure(with: dataItems[indexPath.row])
-        cell.selectionStyle = .none
-        return cell
+        switch indexPath.section {
+        case .photoGallerySection:
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PhotosTableViewCell.self), for: indexPath) as! PhotosTableViewCell
+            cell.selectionStyle = .gray
+            return cell
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostCell.self), for: indexPath) as! PostCell
+            cell.configure(with: dataItems[indexPath.row])
+            cell.selectionStyle = .none
+            return cell
+        }
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return ProfileHeaderView()
+        switch section {
+        case .photoGallerySection:
+            return ProfileHeaderView()
+        default:
+            return nil
+        }
     }
 }
 
 private extension Int {
+    static let photoGallerySection: Int = 0
     static let headerViewSection: Int = 0
 }
