@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 final class PostCell: UITableViewCell {
 
@@ -73,7 +74,12 @@ final class PostCell: UITableViewCell {
     public func configure(with data: PostModel) {
         title.text = data.author
         desc.text = data.description
-        image.image = UIImage(named: data.image)
+        let imageProcessor = ImageProcessor()
+        let image = UIImage(named: data.image)!
+        imageProcessor.processImage(sourceImage: image, filter: .allCases.randomElement() ?? .colorInvert) { image in
+            self.image.image = image
+        }
+
         likes.text = "Likes: " + String(data.likes)
         views.text = "Views: " + String(data.views)
     }
