@@ -5,7 +5,7 @@
 //  Created by m.khutornaya on 17.07.2022.
 //
 
-import UIKit
+import SnapKit
 
 final class ProfileHeaderView: UIView {
 
@@ -95,31 +95,40 @@ final class ProfileHeaderView: UIView {
         let subviews = [userName, userImage, statusButton, inputField, statusLabel]
         subviews.forEach { addSubview($0) }
 
-        NSLayoutConstraint.activate([
-            userImage.topAnchor.constraint(equalTo: topAnchor, constant: .safeArea),
-            userImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .safeArea),
-            userImage.heightAnchor.constraint(equalToConstant: .imageSize),
-            userImage.widthAnchor.constraint(equalToConstant: .imageSize),
+        userImage.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(self).offset(CGFloat.safeArea)
+            make.left.equalTo(self).offset(CGFloat.safeArea)
+            make.height.equalTo(CGFloat.imageSize)
+            make.width.equalTo(CGFloat.imageSize)
+        }
 
-            statusButton.topAnchor.constraint(equalTo: userImage.bottomAnchor, constant: .safeArea),
-            statusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .safeArea),
-            statusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.safeArea),
-            statusButton.heightAnchor.constraint(equalToConstant: 50),
-            statusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.safeArea),
+        statusButton.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(userImage.snp.bottom).offset(CGFloat.safeArea)
+            make.left.equalTo(self).offset(CGFloat.safeArea)
+            make.right.equalTo(self).offset(-CGFloat.safeArea)
+            make.height.equalTo(50)
+            make.width.equalTo(CGFloat.imageSize)
+            make.bottom.equalTo(self).offset(-CGFloat.safeArea)
+        }
 
-            userName.topAnchor.constraint(equalTo: topAnchor, constant: 27),
-            userName.leadingAnchor.constraint(equalTo: userImage.trailingAnchor, constant: .safeArea),
-            userName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.safeArea),
+        userName.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(self).offset(27)
+            make.left.equalTo(userImage.snp.right).offset(CGFloat.safeArea)
+            make.right.equalTo(self).offset(-CGFloat.safeArea)
+        }
 
-            statusLabel.bottomAnchor.constraint(equalTo: inputField.topAnchor, constant: -5),
-            statusLabel.leadingAnchor.constraint(equalTo: userImage.trailingAnchor, constant: .safeArea),
-            statusLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.safeArea),
+        statusLabel.snp.makeConstraints { (make) -> Void in
+            make.bottom.equalTo(inputField.snp.top).offset(-5)
+            make.left.equalTo(userImage.snp.right).offset(CGFloat.safeArea)
+            make.right.equalTo(self).offset(-CGFloat.safeArea)
+        }
 
-            inputField.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -.safeArea),
-            inputField.leadingAnchor.constraint(equalTo: userImage.trailingAnchor, constant: .safeArea),
-            inputField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.safeArea),
-            inputField.heightAnchor.constraint(equalToConstant: 40)
-        ])
+        inputField.snp.makeConstraints { (make) -> Void in
+            make.left.equalTo(userImage.snp.right).offset(CGFloat.safeArea)
+            make.right.equalTo(self).offset(-CGFloat.safeArea)
+            make.height.equalTo(40)
+            make.bottom.equalTo(statusButton.snp.top).offset(-CGFloat.safeArea)
+        }
     }
 
     @objc
