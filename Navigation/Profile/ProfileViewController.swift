@@ -11,10 +11,12 @@ final class ProfileViewController: UIViewController {
 
     private let dataItems = PostRepository().dataItems
     private let nc = NotificationCenter.default
+    private let user: User
 
     private var tableViewConstraint: NSLayoutConstraint!
 
-    init() {
+    init(user: User) {
+        self.user = user
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -131,7 +133,9 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case .photoGallerySection:
-            return ProfileHeaderView()
+            let headerView = ProfileHeaderView()
+            headerView.configure(with: user)
+            return headerView
         default:
             return nil
         }

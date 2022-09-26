@@ -104,6 +104,19 @@ final class LogInViewController: UIViewController {
         return view
     }()
 
+    private let alert: UIAlertController = {
+        let alert = UIAlertController(title: String.alertTitle, message: String.alertMessage, preferredStyle: .alert)
+        let action = UIAlertAction(title: String.alertAction, style: .default, handler: nil)
+        alert.addAction(action)
+
+        return alert
+    }()
+
+    private func cleanInputs () {
+        inputPasswordField.text = nil
+        inputLoginField.text = nil
+    }
+
     // MARK: Lifecycle
 
     init() {
@@ -208,7 +221,20 @@ final class LogInViewController: UIViewController {
 
     @objc
     private func didTapLoginButton() {
-        navigationController?.pushViewController(ProfileViewController(), animated: true)
+        let userService: UserServiceProtocol
+        #if DEBUG
+        userService = TestUserService()
+        #else
+        userService = CurrentUserService()
+        #endif
+
+        guard let user = userService.getUser(login: inputLoginField.text, password: inputPasswordField.text) else {
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        inputLoginField.text = nil
+        inputPasswordField.text = nil
+        navigationController?.pushViewController(ProfileViewController(user: user), animated: true)
     }
 }
 
@@ -223,4 +249,10 @@ private extension CGFloat {
     static let size: CGFloat = 100
     static let safeArea: CGFloat = 16
     static let vertical: CGFloat = 120
+}
+
+private extension String {
+    static let alertTitle = "Ошибка авторизации"
+    static let alertMessage = "Введенные вами логин или пароль неверные"
+    static let alertAction = "Повторить"
 }
