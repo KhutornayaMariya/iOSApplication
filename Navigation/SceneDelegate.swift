@@ -27,6 +27,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         tabBarVc.tabBar.backgroundColor = .white
         window.rootViewController = tabBarVc
         window.makeKeyAndVisible()
+
+        LogInViewController.loginDelegate = LoginInspector()
+
         self.window = window
     }
     

@@ -13,6 +13,8 @@ final class LogInViewController: UIViewController {
 
     private var scrollViewConstraint: NSLayoutConstraint!
 
+    static var loginDelegate: LoginViewControllerDelegate?
+
     private let scrollView: UIScrollView = {
         let view = UIScrollView()
 
@@ -221,14 +223,16 @@ final class LogInViewController: UIViewController {
 
     @objc
     private func didTapLoginButton() {
-        let userService: UserServiceProtocol
         #if DEBUG
-        userService = TestUserService()
+        let userService = TestUserService()
         #else
-        userService = CurrentUserService()
+        let userService = CurrentUserService()
         #endif
 
-        guard let user = userService.getUser(login: inputLoginField.text, password: inputPasswordField.text) else {
+        guard let loginDelegate = LogInViewController.loginDelegate,
+              loginDelegate.check(login: inputLoginField.text!, password: inputPasswordField.text!),
+              let user = userService.getUser(login: inputLoginField.text, password: inputPasswordField.text)
+        else {
             present(alert, animated: true, completion: nil)
             return
         }
