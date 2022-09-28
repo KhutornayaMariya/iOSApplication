@@ -38,6 +38,7 @@
 		45E949D028E4560B00C48419 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E949CF28E4560B00C48419 /* Checker.swift */; };
 		45E949D328E4573A00C48419 /* LoginViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E949D228E4573A00C48419 /* LoginViewControllerDelegate.swift */; };
 		45E949D528E457FA00C48419 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E949D428E457FA00C48419 /* LoginInspector.swift */; };
+		45E949D728E4644200C48419 /* MyLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E949D628E4644200C48419 /* MyLoginFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		45E949CF28E4560B00C48419 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		45E949D228E4573A00C48419 /* LoginViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegate.swift; sourceTree = "<group>"; };
 		45E949D428E457FA00C48419 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
+		45E949D628E4644200C48419 /* MyLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLoginFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +250,7 @@
 				45229FB12883FA6900EF150F /* LogInViewController.swift */,
 				45E949D228E4573A00C48419 /* LoginViewControllerDelegate.swift */,
 				45E949D428E457FA00C48419 /* LoginInspector.swift */,
+				45E949D628E4644200C48419 /* MyLoginFactory.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45E949D728E4644200C48419 /* MyLoginFactory.swift in Sources */,
 				45D3105527259D0F0034F6A2 /* PostViewController.swift in Sources */,
 				45AD682D28E1F5F300E44A20 /* CurrentUserService.swift in Sources */,
 				45AD682F28E2057400E44A20 /* TestUserService.swift in Sources */,

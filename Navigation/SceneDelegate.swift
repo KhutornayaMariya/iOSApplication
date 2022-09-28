@@ -28,7 +28,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = tabBarVc
         window.makeKeyAndVisible()
 
-        LogInViewController.loginDelegate = LoginInspector()
+        let loginInspector = MyLoginFactory().makeLoginInspector()
+        LogInViewController.loginDelegate = loginInspector
 
         self.window = window
     }
