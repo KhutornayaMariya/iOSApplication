@@ -16,7 +16,6 @@ final class ProfileHeaderView: UIView {
 
         view.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         view.textColor = .black
-        view.text = "Hipster Cat"
         view.translatesAutoresizingMaskIntoConstraints = false
 
         return view
@@ -28,7 +27,6 @@ final class ProfileHeaderView: UIView {
         view.layer.borderWidth = 3
         view.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         view.layer.cornerRadius = .imageSize/2
-        view.image = UIImage(named: "ice")
         view.clipsToBounds = true
         view.contentMode = .scaleToFill
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -56,7 +54,6 @@ final class ProfileHeaderView: UIView {
     private lazy var statusLabel: UILabel = {
         let view = UILabel()
 
-        view.text = statusText
         view.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         view.textColor = .gray
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -88,6 +85,12 @@ final class ProfileHeaderView: UIView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    public func configure(with user: User) {
+        userName.text = user.name
+        userImage.image = user.avatar
+        statusLabel.text = user.status
     }
 
     private func setUp() {

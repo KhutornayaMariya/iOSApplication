@@ -20,6 +20,10 @@
 		457FAAE52896AB79007702B3 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 457FAADE2896AB79007702B3 /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		457FAAEA2896AB8F007702B3 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D3105A2725B0A40034F6A2 /* Post.swift */; };
 		45A72954288BE92200107918 /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A72953288BE92200107918 /* PostRepository.swift */; };
+		45AD682928E1F51600E44A20 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AD682828E1F51600E44A20 /* User.swift */; };
+		45AD682B28E1F59500E44A20 /* UserServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AD682A28E1F59500E44A20 /* UserServiceProtocol.swift */; };
+		45AD682D28E1F5F300E44A20 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AD682C28E1F5F300E44A20 /* CurrentUserService.swift */; };
+		45AD682F28E2057400E44A20 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AD682E28E2057400E44A20 /* TestUserService.swift */; };
 		45D31039272581B50034F6A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D31038272581B50034F6A2 /* AppDelegate.swift */; };
 		45D3103B272581B50034F6A2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D3103A272581B50034F6A2 /* SceneDelegate.swift */; };
 		45D3103D272581B50034F6A2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D3103C272581B50034F6A2 /* ViewController.swift */; };
@@ -69,6 +73,10 @@
 		457FAADE2896AB79007702B3 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		457FAAE02896AB79007702B3 /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
 		45A72953288BE92200107918 /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
+		45AD682828E1F51600E44A20 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		45AD682A28E1F59500E44A20 /* UserServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceProtocol.swift; sourceTree = "<group>"; };
+		45AD682C28E1F5F300E44A20 /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
+		45AD682E28E2057400E44A20 /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
 		45D31035272581B50034F6A2 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45D31038272581B50034F6A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45D3103A272581B50034F6A2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -145,6 +153,17 @@
 			path = StorageService;
 			sourceTree = "<group>";
 		};
+		45AD682728E1F50800E44A20 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				45AD682828E1F51600E44A20 /* User.swift */,
+				45AD682A28E1F59500E44A20 /* UserServiceProtocol.swift */,
+				45AD682C28E1F5F300E44A20 /* CurrentUserService.swift */,
+				45AD682E28E2057400E44A20 /* TestUserService.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		45D3102C272581B50034F6A2 = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +185,7 @@
 		45D31037272581B50034F6A2 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				45AD682728E1F50800E44A20 /* User */,
 				45229FAC2883D63300EF150F /* Profile */,
 				45D310632725BBBE0034F6A2 /* InfoView */,
 				45D310622725BBAD0034F6A2 /* FeedView */,
@@ -328,6 +348,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				45D3105527259D0F0034F6A2 /* PostViewController.swift in Sources */,
+				45AD682D28E1F5F300E44A20 /* CurrentUserService.swift in Sources */,
+				45AD682F28E2057400E44A20 /* TestUserService.swift in Sources */,
 				45229FC22884777000EF150F /* PhotosViewController.swift in Sources */,
 				45D310572725A7CB0034F6A2 /* FeedView.swift in Sources */,
 				45D3103D272581B50034F6A2 /* ViewController.swift in Sources */,
@@ -337,6 +359,7 @@
 				45229FB92884386700EF150F /* PostModel.swift in Sources */,
 				45D3105F2725B6120034F6A2 /* InfoView.swift in Sources */,
 				45229FB22883FA6900EF150F /* LogInViewController.swift in Sources */,
+				45AD682B28E1F59500E44A20 /* UserServiceProtocol.swift in Sources */,
 				45229FC428847BB400EF150F /* PhotosCollectionViewCell.swift in Sources */,
 				45D31039272581B50034F6A2 /* AppDelegate.swift in Sources */,
 				45229FAE2883D64400EF150F /* ProfileHeaderView.swift in Sources */,
@@ -345,6 +368,7 @@
 				45D3105D2725B3690034F6A2 /* InfoViewController.swift in Sources */,
 				45D3103B272581B50034F6A2 /* SceneDelegate.swift in Sources */,
 				45229FBB28843E0400EF150F /* PostCell.swift in Sources */,
+				45AD682928E1F51600E44A20 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
