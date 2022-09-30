@@ -9,7 +9,7 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
 
-    private let dataItems = PostRepository().dataItems
+    private let dataItems = ProfileRepository().postItems
     private let nc = NotificationCenter.default
     private let user: User
 
