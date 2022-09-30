@@ -73,7 +73,7 @@ final class ProfileViewController: UIViewController {
         #if DEBUG
         view.backgroundColor = .lightGray
         #else
-        view.backgroundColor = .red
+        view.backgroundColor = .white
         #endif
 
         view.addSubview(tableView)
