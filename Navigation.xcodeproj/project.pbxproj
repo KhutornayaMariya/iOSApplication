@@ -35,6 +35,10 @@
 		45D310572725A7CB0034F6A2 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D310562725A7CB0034F6A2 /* FeedView.swift */; };
 		45D3105D2725B3690034F6A2 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D3105C2725B3690034F6A2 /* InfoViewController.swift */; };
 		45D3105F2725B6120034F6A2 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D3105E2725B6120034F6A2 /* InfoView.swift */; };
+		45E949D028E4560B00C48419 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E949CF28E4560B00C48419 /* Checker.swift */; };
+		45E949D328E4573A00C48419 /* LoginViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E949D228E4573A00C48419 /* LoginViewControllerDelegate.swift */; };
+		45E949D528E457FA00C48419 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E949D428E457FA00C48419 /* LoginInspector.swift */; };
+		45E949D728E4644200C48419 /* MyLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E949D628E4644200C48419 /* MyLoginFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +95,10 @@
 		45D3105A2725B0A40034F6A2 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		45D3105C2725B3690034F6A2 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		45D3105E2725B6120034F6A2 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		45E949CF28E4560B00C48419 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
+		45E949D228E4573A00C48419 /* LoginViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegate.swift; sourceTree = "<group>"; };
+		45E949D428E457FA00C48419 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
+		45E949D628E4644200C48419 /* MyLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLoginFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,7 +127,6 @@
 				45229FB72884385700EF150F /* ViewModel */,
 				45229FAD2883D64400EF150F /* ProfileHeaderView.swift */,
 				45229FAF2883D66700EF150F /* ProfileViewController.swift */,
-				45229FB12883FA6900EF150F /* LogInViewController.swift */,
 				45229FC12884777000EF150F /* PhotosViewController.swift */,
 				45A72953288BE92200107918 /* PostRepository.swift */,
 			);
@@ -185,6 +192,8 @@
 		45D31037272581B50034F6A2 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				45E949D128E4571F00C48419 /* Login */,
+				45E949CE28E455F800C48419 /* Checker */,
 				45AD682728E1F50800E44A20 /* User */,
 				45229FAC2883D63300EF150F /* Profile */,
 				45D310632725BBBE0034F6A2 /* InfoView */,
@@ -225,6 +234,25 @@
 				45D3105E2725B6120034F6A2 /* InfoView.swift */,
 			);
 			path = InfoView;
+			sourceTree = "<group>";
+		};
+		45E949CE28E455F800C48419 /* Checker */ = {
+			isa = PBXGroup;
+			children = (
+				45E949CF28E4560B00C48419 /* Checker.swift */,
+			);
+			path = Checker;
+			sourceTree = "<group>";
+		};
+		45E949D128E4571F00C48419 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				45229FB12883FA6900EF150F /* LogInViewController.swift */,
+				45E949D228E4573A00C48419 /* LoginViewControllerDelegate.swift */,
+				45E949D428E457FA00C48419 /* LoginInspector.swift */,
+				45E949D628E4644200C48419 /* MyLoginFactory.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -347,6 +375,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45E949D728E4644200C48419 /* MyLoginFactory.swift in Sources */,
 				45D3105527259D0F0034F6A2 /* PostViewController.swift in Sources */,
 				45AD682D28E1F5F300E44A20 /* CurrentUserService.swift in Sources */,
 				45AD682F28E2057400E44A20 /* TestUserService.swift in Sources */,
@@ -364,11 +393,14 @@
 				45D31039272581B50034F6A2 /* AppDelegate.swift in Sources */,
 				45229FAE2883D64400EF150F /* ProfileHeaderView.swift in Sources */,
 				45D3105127259BDC0034F6A2 /* FeedViewController.swift in Sources */,
+				45E949D528E457FA00C48419 /* LoginInspector.swift in Sources */,
 				45229FB02883D66700EF150F /* ProfileViewController.swift in Sources */,
 				45D3105D2725B3690034F6A2 /* InfoViewController.swift in Sources */,
 				45D3103B272581B50034F6A2 /* SceneDelegate.swift in Sources */,
 				45229FBB28843E0400EF150F /* PostCell.swift in Sources */,
+				45E949D328E4573A00C48419 /* LoginViewControllerDelegate.swift in Sources */,
 				45AD682928E1F51600E44A20 /* User.swift in Sources */,
+				45E949D028E4560B00C48419 /* Checker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
