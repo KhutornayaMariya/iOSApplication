@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         profileViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "house"), selectedImage: nil)
 
         let feedViewController = UINavigationController()
-        feedViewController.pushViewController(FeedViewController(.cyan, "News", parent: feedViewController), animated: false)
+        feedViewController.pushViewController(FeedViewController(.systemGray6, "News", parent: feedViewController), animated: false)
         feedViewController.tabBarItem = UITabBarItem(title: "News", image: UIImage(systemName: "doc"), selectedImage: nil)
 
         let tabBarVc = TabBarController(viewControllers: [feedViewController, profileViewController])
