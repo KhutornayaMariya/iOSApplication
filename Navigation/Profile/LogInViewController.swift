@@ -89,17 +89,15 @@ final class LogInViewController: UIViewController {
         return view
     }()
 
-    private lazy var loginButton: UIButton = {
-        let view = UIButton()
+    private lazy var loginButton: CustomButton = {
+        let view = CustomButton(title: "Log In", titleColor: .white)
 
-        view.setTitle("Log In", for: .normal)
-        view.setTitleColor(.white, for: .normal)
         let image = UIImage(named: "blue_pixel")
         view.setBackgroundImage(image, for: .normal)
         view.layer.cornerRadius = 10
         view.layer.masksToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
+        view.tapAction = didTapLoginButton
 
         return view
     }()
