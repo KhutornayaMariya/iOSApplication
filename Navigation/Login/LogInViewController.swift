@@ -114,11 +114,6 @@ final class LogInViewController: UIViewController {
         return alert
     }()
 
-    private func cleanInputs () {
-        inputPasswordField.text = nil
-        inputLoginField.text = nil
-    }
-
     // MARK: Lifecycle
 
     init() {
@@ -147,17 +142,6 @@ final class LogInViewController: UIViewController {
         nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
 
-    @objc private func keyboardHide() {
-        scrollViewConstraint.constant = 0
-        view.setNeedsLayout()
-    }
-
-    @objc private func keyboardShow(notification: Notification) {
-        guard let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
-        scrollViewConstraint.constant = -frame.size.height
-        view.setNeedsLayout()
-    }
-
     private func setUp() {
         view.backgroundColor = .white
         view.addSubview(scrollView)
@@ -165,6 +149,8 @@ final class LogInViewController: UIViewController {
 
         let subviews = [logo, backgroundView, loginButton]
         subviews.forEach { contentView.addSubview($0) }
+
+        [inputLoginField, inputPasswordField, separator].forEach { backgroundView.addSubview($0) }
 
         scrollViewConstraint = scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
 
@@ -195,15 +181,7 @@ final class LogInViewController: UIViewController {
             loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.safeArea),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
             loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-        ])
 
-        setupBackgroundSubviews()
-    }
-
-    private func setupBackgroundSubviews() {
-        [inputLoginField, inputPasswordField, separator].forEach { backgroundView.addSubview($0) }
-
-        NSLayoutConstraint.activate([
             inputLoginField.topAnchor.constraint(equalTo: backgroundView.topAnchor),
             inputLoginField.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: .safeArea),
             inputLoginField.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -.safeArea),
@@ -222,23 +200,41 @@ final class LogInViewController: UIViewController {
     }
 
     @objc
+    private func keyboardHide() {
+        scrollViewConstraint.constant = 0
+        view.setNeedsLayout()
+    }
+
+    @objc
+    private func keyboardShow(notification: Notification) {
+        guard let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        scrollViewConstraint.constant = -frame.size.height
+        view.setNeedsLayout()
+    }
+
+    @objc
     private func didTapLoginButton() {
-        #if DEBUG
+#if DEBUG
         let userService = TestUserService()
-        #else
+#else
         let userService = CurrentUserService()
-        #endif
+#endif
 
         guard let loginDelegate = LogInViewController.loginDelegate,
-              loginDelegate.check(login: inputLoginField.text!, password: inputPasswordField.text!),
-              let user = userService.getUser(login: inputLoginField.text, password: inputPasswordField.text)
+              loginDelegate.check(login: inputLoginField.text!, password: inputPasswordField.text!)
         else {
             present(alert, animated: true, completion: nil)
             return
         }
-        inputLoginField.text = nil
-        inputPasswordField.text = nil
+        cleanInputs()
+
+        let user = userService.getUser()
         navigationController?.pushViewController(ProfileViewController(user: user), animated: true)
+    }
+
+    private func cleanInputs () {
+        inputPasswordField.text = nil
+        inputLoginField.text = nil
     }
 }
 
