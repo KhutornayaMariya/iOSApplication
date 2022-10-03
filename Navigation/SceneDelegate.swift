@@ -15,19 +15,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: scene)
-        
-        let profileViewController = UINavigationController(rootViewController: LogInViewController())
-        profileViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "house"), selectedImage: nil)
 
-        let feedViewController = UINavigationController()
-        feedViewController.pushViewController(FeedViewController(.systemGray6, "News", parent: feedViewController), animated: false)
-        feedViewController.tabBarItem = UITabBarItem(title: "News", image: UIImage(systemName: "doc"), selectedImage: nil)
+        let loginInspector = MyLoginFactory().makeLoginInspector()
+        LogInViewController.loginDelegate = loginInspector
 
-        let tabBarVc = TabBarController(viewControllers: [feedViewController, profileViewController])
-        tabBarVc.tabBar.backgroundColor = .white
-        window.rootViewController = tabBarVc
-        window.makeKeyAndVisible()
         self.window = window
+        window.makeKeyAndVisible()
+        let mainCoordinator = MainCoordinator()
+        window.rootViewController = mainCoordinator.startApplication()
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
