@@ -19,6 +19,8 @@
 		457FAAE42896AB79007702B3 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 457FAADE2896AB79007702B3 /* StorageService.framework */; };
 		457FAAE52896AB79007702B3 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 457FAADE2896AB79007702B3 /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		457FAAEA2896AB8F007702B3 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D3105A2725B0A40034F6A2 /* Post.swift */; };
+		458198B728EAC47700A5C852 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458198B628EAC47700A5C852 /* CustomButton.swift */; };
+		45A72954288BE92200107918 /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A72953288BE92200107918 /* PostRepository.swift */; };
 		45A72954288BE92200107918 /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A72953288BE92200107918 /* ProfileRepository.swift */; };
 		45AD682928E1F51600E44A20 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AD682828E1F51600E44A20 /* User.swift */; };
 		45AD682B28E1F59500E44A20 /* UserServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AD682A28E1F59500E44A20 /* UserServiceProtocol.swift */; };
@@ -77,6 +79,8 @@
 		45229FC328847BB400EF150F /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		457FAADE2896AB79007702B3 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		457FAAE02896AB79007702B3 /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
+		458198B628EAC47700A5C852 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		45A72953288BE92200107918 /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
 		45A72953288BE92200107918 /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
 		45AD682828E1F51600E44A20 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		45AD682A28E1F59500E44A20 /* UserServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceProtocol.swift; sourceTree = "<group>"; };
@@ -162,6 +166,14 @@
 			path = StorageService;
 			sourceTree = "<group>";
 		};
+		458198B528EAC46A00A5C852 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				458198B628EAC47700A5C852 /* CustomButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		45AD682728E1F50800E44A20 /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +206,7 @@
 		45D31037272581B50034F6A2 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				458198B528EAC46A00A5C852 /* Views */,
 				45E949D128E4571F00C48419 /* Login */,
 				45E949CE28E455F800C48419 /* Checker */,
 				45AD682728E1F50800E44A20 /* User */,
@@ -401,6 +414,7 @@
 				45D31039272581B50034F6A2 /* AppDelegate.swift in Sources */,
 				45229FAE2883D64400EF150F /* ProfileHeaderView.swift in Sources */,
 				45D3105127259BDC0034F6A2 /* FeedViewController.swift in Sources */,
+				458198B728EAC47700A5C852 /* CustomButton.swift in Sources */,
 				45E949D528E457FA00C48419 /* LoginInspector.swift in Sources */,
 				45229FB02883D66700EF150F /* ProfileViewController.swift in Sources */,
 				45D3105D2725B3690034F6A2 /* InfoViewController.swift in Sources */,

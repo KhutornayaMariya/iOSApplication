@@ -16,10 +16,9 @@ class FeedView: UIView {
         return buttonView;
     }()
     
-    var button: UIButton = {
-        let button = UIButton(frame: .zero)
+    var button: CustomButton = {
+        let button = CustomButton(title: "button", titleColor: .magenta)
         button.backgroundColor = .white
-        button.setTitleColor(.magenta, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -28,7 +27,6 @@ class FeedView: UIView {
         super.init(frame: frame)
         self.backgroundColor = .red
         addSubview(buttonView)
-        button.setTitle("button", for: .normal)
         buttonView.addSubview(button)
         configureLayout()
     }

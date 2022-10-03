@@ -34,19 +34,17 @@ final class ProfileHeaderView: UIView {
         return view
     }()
 
-    private lazy var statusButton: UIButton = {
-        let view = UIButton()
+    private lazy var statusButton: CustomButton = {
+        let view = CustomButton(title: "Show status", titleColor: .white)
 
         view.backgroundColor = .systemBlue
         view.layer.cornerRadius = 4
-        view.setTitle("Show status", for: .normal)
-        view.setTitleColor(.white, for: .normal)
         view.layer.shadowOffset = CGSize(width: 4, height: 4)
         view.layer.shadowRadius = 4
         view.layer.shadowColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
         view.layer.shadowOpacity = 0.7
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.addTarget(self, action: #selector(onButtonTapHander), for: .touchUpInside)
+        view.tapAction = onButtonTapHander
 
         return view
     }()
