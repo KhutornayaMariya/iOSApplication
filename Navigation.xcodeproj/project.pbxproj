@@ -26,7 +26,6 @@
 		458198C028EB2E8B00A5C852 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458198BF28EB2E8B00A5C852 /* ProfileCoordinator.swift */; };
 		458198C228EB2EA800A5C852 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458198C128EB2EA800A5C852 /* FeedCoordinator.swift */; };
 		458198C528EB312F00A5C852 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458198C428EB312F00A5C852 /* MainCoordinator.swift */; };
-		45A72954288BE92200107918 /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A72953288BE92200107918 /* PostRepository.swift */; };
 		45A72954288BE92200107918 /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A72953288BE92200107918 /* ProfileRepository.swift */; };
 		45AD682928E1F51600E44A20 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AD682828E1F51600E44A20 /* User.swift */; };
 		45AD682B28E1F59500E44A20 /* UserServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AD682A28E1F59500E44A20 /* UserServiceProtocol.swift */; };
@@ -92,7 +91,6 @@
 		458198BF28EB2E8B00A5C852 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		458198C128EB2EA800A5C852 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		458198C428EB312F00A5C852 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
-		45A72953288BE92200107918 /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
 		45A72953288BE92200107918 /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
 		45AD682828E1F51600E44A20 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		45AD682A28E1F59500E44A20 /* UserServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceProtocol.swift; sourceTree = "<group>"; };
