@@ -1,5 +1,5 @@
 //
-//  PostRepository.swift
+//  ProfileRepository.swift
 //  Navigation
 //
 //  Created by m.khutornaya on 23.07.2022.

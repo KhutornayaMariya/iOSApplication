@@ -226,8 +226,8 @@ final class LogInViewController: UIViewController {
         }
         cleanInputs()
 
-        let user = userService.getUser()
-        navigationController?.pushViewController(ProfileViewController(user: user), animated: true)
+        let model = ProfileViewModel(user: userService.getUser())
+        navigationController?.pushViewController(ProfileViewController(viewModel: model), animated: true)
     }
 
     private func cleanInputs () {
