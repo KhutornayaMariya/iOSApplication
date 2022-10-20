@@ -68,59 +68,17 @@ final class PhotosViewController: UIViewController {
     }
 
     private func applyImageFilter() {
-        var startDefault = DispatchTime.now()
-        ImageProcessor().processImagesOnThread(sourceImages: dataItems,
-                                               filter: .monochrome(color: .black, intensity: 1.0),
-                                               qos: .default) { result in
-            self.dataItems = result.compactMap { UIImage(cgImage: $0!) }
-            let end = DispatchTime.now()
-            let nanoTime = end.uptimeNanoseconds - startDefault.uptimeNanoseconds
-            let timeInterval = Double(nanoTime)
-            print("Default time evaluated: \(timeInterval)") // 1289704667.0
-        }
-
-        let startInteractive = DispatchTime.now()
+        let startDefault = CFAbsoluteTimeGetCurrent()
         ImageProcessor().processImagesOnThread(sourceImages: dataItems,
                                                filter: .monochrome(color: .red, intensity: 1.0),
                                                qos: .userInteractive) { result in
             self.dataItems = result.compactMap { UIImage(cgImage: $0!) }
-            let end = DispatchTime.now()
-            let nanoTime = end.uptimeNanoseconds - startInteractive.uptimeNanoseconds
-            let timeInterval = Double(nanoTime)
-            print("userInteractive time evaluated: \(timeInterval)") // 1287988375.0
-        }
-
-        let startInitiated = DispatchTime.now()
-        ImageProcessor().processImagesOnThread(sourceImages: dataItems,
-                                               filter: .monochrome(color: .green, intensity: 1.0),
-                                               qos: .userInitiated) { result in
-            self.dataItems = result.compactMap { UIImage(cgImage: $0!) }
-            let end = DispatchTime.now()
-            let nanoTime = end.uptimeNanoseconds - startInitiated.uptimeNanoseconds
-            let timeInterval = Double(nanoTime)
-            print("userInitiated time evaluated: \(timeInterval)") // 1287909167.0
-        }
-
-        let startBackground = DispatchTime.now()
-        ImageProcessor().processImagesOnThread(sourceImages: dataItems,
-                                               filter: .monochrome(color: .yellow, intensity: 1.0),
-                                               qos: .background) { result in
-            self.dataItems = result.compactMap { UIImage(cgImage: $0!) }
-            let end = DispatchTime.now()
-            let nanoTime = end.uptimeNanoseconds - startBackground.uptimeNanoseconds
-            let timeInterval = Double(nanoTime)
-            print("background time evaluated: \(timeInterval)") // 1521367084.0
-        }
-
-        let startUtility = DispatchTime.now()
-        ImageProcessor().processImagesOnThread(sourceImages: dataItems,
-                                               filter: .monochrome(color: .green, intensity: 1.0),
-                                               qos: .utility) { result in
-            self.dataItems = result.compactMap { UIImage(cgImage: $0!) }
-            let end = DispatchTime.now()
-            let nanoTime = end.uptimeNanoseconds - startUtility.uptimeNanoseconds
-            let timeInterval = Double(nanoTime)
-            print("utility time evaluated: \(timeInterval)") // 1306431041.0
+            let end = CFAbsoluteTimeGetCurrent()
+            let time = end - startDefault
+            print("userInteractive time evaluated: \(time)")
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
     }
 
