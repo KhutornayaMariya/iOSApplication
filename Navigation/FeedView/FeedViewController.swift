@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import StorageService
 
 class FeedViewController: UIViewController {
     
     weak var parentNavigationController: UINavigationController?
+    let model: FeedModel = FeedModel()
+    let mainView: FeedView = FeedView()
     
     var backgroundColor: UIColor = .white
     
@@ -25,10 +28,11 @@ class FeedViewController: UIViewController {
     }
     
     override func loadView() {
-        let view = FeedView()
-        view.button.addTarget(self, action: #selector(onButtonTap), for: .touchUpInside)
+        super.loadView()
+        self.view = mainView
+        mainView.setButtonTapAction(action: onButtonTap)
+        mainView.setCheckGuessButtonTapAction(action: onCheckGuessButtonTap)
         view.backgroundColor = backgroundColor
-        self.view = view
     }
     
     override func viewDidLoad() {
@@ -38,6 +42,17 @@ class FeedViewController: UIViewController {
     @objc
     func onButtonTap() {
         parentNavigationController?.pushViewController(PostViewController(.orange, getPost()), animated: true)
+    }
+
+    @objc
+    func onCheckGuessButtonTap() {
+        let result = model.check(mainView.getInputText())
+
+        if result {
+            mainView.setLabelColor(.green)
+        } else {
+            mainView.setLabelColor(.red)
+        }
     }
     
     private func getPost() -> Post {

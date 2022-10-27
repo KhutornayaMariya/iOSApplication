@@ -6,14 +6,11 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 final class PhotosViewController: UIViewController {
 
-    let dataItems: [String] = ["one", "two", "three", "four", "five",
-                               "six", "seven", "eight", "nine", "ten",
-                               "eleven", "twelve", "thirteen", "fourteen",
-                               "fifteen", "sixteen", "seventeen", "eighteen",
-                               "nineteen", "twenty"]
+    var dataItems: [UIImage] = ProfileRepository().photoItems
 
     private lazy var collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
@@ -48,6 +45,7 @@ final class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        applyImageFilter()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -67,6 +65,21 @@ final class PhotosViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+
+    private func applyImageFilter() {
+        let startDefault = CFAbsoluteTimeGetCurrent()
+        ImageProcessor().processImagesOnThread(sourceImages: dataItems,
+                                               filter: .monochrome(color: .red, intensity: 1.0),
+                                               qos: .userInteractive) { result in
+            self.dataItems = result.compactMap { UIImage(cgImage: $0!) }
+            let end = CFAbsoluteTimeGetCurrent()
+            let time = end - startDefault
+            print("userInteractive time evaluated: \(time)")
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
     }
 
     private func createLayout() -> UICollectionViewLayout {

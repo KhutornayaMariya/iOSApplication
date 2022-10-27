@@ -13,6 +13,8 @@ final class LogInViewController: UIViewController {
 
     private var scrollViewConstraint: NSLayoutConstraint!
 
+    static var loginDelegate: LoginViewControllerDelegate?
+
     private let scrollView: UIScrollView = {
         let view = UIScrollView()
 
@@ -89,19 +91,25 @@ final class LogInViewController: UIViewController {
         return view
     }()
 
-    private lazy var loginButton: UIButton = {
-        let view = UIButton()
+    private lazy var loginButton: CustomButton = {
+        let view = CustomButton(title: "Log In", titleColor: .white)
 
-        view.setTitle("Log In", for: .normal)
-        view.setTitleColor(.white, for: .normal)
         let image = UIImage(named: "blue_pixel")
         view.setBackgroundImage(image, for: .normal)
         view.layer.cornerRadius = 10
         view.layer.masksToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
+        view.tapAction = didTapLoginButton
 
         return view
+    }()
+
+    private let alert: UIAlertController = {
+        let alert = UIAlertController(title: String.alertTitle, message: String.alertMessage, preferredStyle: .alert)
+        let action = UIAlertAction(title: String.alertAction, style: .default, handler: nil)
+        alert.addAction(action)
+
+        return alert
     }()
 
     // MARK: Lifecycle
@@ -132,17 +140,6 @@ final class LogInViewController: UIViewController {
         nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
 
-    @objc private func keyboardHide() {
-        scrollViewConstraint.constant = 0
-        view.setNeedsLayout()
-    }
-
-    @objc private func keyboardShow(notification: Notification) {
-        guard let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
-        scrollViewConstraint.constant = -frame.size.height
-        view.setNeedsLayout()
-    }
-
     private func setUp() {
         view.backgroundColor = .white
         view.addSubview(scrollView)
@@ -150,6 +147,8 @@ final class LogInViewController: UIViewController {
 
         let subviews = [logo, backgroundView, loginButton]
         subviews.forEach { contentView.addSubview($0) }
+
+        [inputLoginField, inputPasswordField, separator].forEach { backgroundView.addSubview($0) }
 
         scrollViewConstraint = scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
 
@@ -180,15 +179,7 @@ final class LogInViewController: UIViewController {
             loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.safeArea),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
             loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-        ])
 
-        setupBackgroundSubviews()
-    }
-
-    private func setupBackgroundSubviews() {
-        [inputLoginField, inputPasswordField, separator].forEach { backgroundView.addSubview($0) }
-
-        NSLayoutConstraint.activate([
             inputLoginField.topAnchor.constraint(equalTo: backgroundView.topAnchor),
             inputLoginField.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: .safeArea),
             inputLoginField.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -.safeArea),
@@ -207,8 +198,41 @@ final class LogInViewController: UIViewController {
     }
 
     @objc
+    private func keyboardHide() {
+        scrollViewConstraint.constant = 0
+        view.setNeedsLayout()
+    }
+
+    @objc
+    private func keyboardShow(notification: Notification) {
+        guard let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        scrollViewConstraint.constant = -frame.size.height
+        view.setNeedsLayout()
+    }
+
+    @objc
     private func didTapLoginButton() {
-        navigationController?.pushViewController(ProfileViewController(), animated: true)
+#if DEBUG
+        let userService = TestUserService()
+#else
+        let userService = CurrentUserService()
+#endif
+
+        guard let loginDelegate = LogInViewController.loginDelegate,
+              loginDelegate.check(login: inputLoginField.text!, password: inputPasswordField.text!)
+        else {
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        cleanInputs()
+
+        let model = ProfileViewModel(user: userService.getUser())
+        navigationController?.pushViewController(ProfileViewController(viewModel: model), animated: true)
+    }
+
+    private func cleanInputs () {
+        inputPasswordField.text = nil
+        inputLoginField.text = nil
     }
 }
 
@@ -223,4 +247,10 @@ private extension CGFloat {
     static let size: CGFloat = 100
     static let safeArea: CGFloat = 16
     static let vertical: CGFloat = 120
+}
+
+private extension String {
+    static let alertTitle = "Ошибка авторизации"
+    static let alertMessage = "Введенные вами логин или пароль неверные"
+    static let alertAction = "Повторить"
 }

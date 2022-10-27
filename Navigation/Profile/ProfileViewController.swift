@@ -9,12 +9,15 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
 
-    private let dataItems = PostRepository().dataItems
+    private let viewModel: ProfileViewModel
+
     private let nc = NotificationCenter.default
+
 
     private var tableViewConstraint: NSLayoutConstraint!
 
-    init() {
+    init(viewModel: ProfileViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -68,7 +71,12 @@ final class ProfileViewController: UIViewController {
     }
 
     private func setUp() {
+        #if DEBUG
         view.backgroundColor = .lightGray
+        #else
+        view.backgroundColor = .white
+        #endif
+
         view.addSubview(tableView)
 
         tableViewConstraint = tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
@@ -105,7 +113,7 @@ extension ProfileViewController: UITableViewDataSource {
         case .photoGallerySection:
             return 1
         default:
-            return dataItems.count
+            return viewModel.dataItems.count
         }
     }
 
@@ -117,7 +125,7 @@ extension ProfileViewController: UITableViewDataSource {
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostCell.self), for: indexPath) as! PostCell
-            cell.configure(with: dataItems[indexPath.row])
+            cell.configure(with: viewModel.dataItems[indexPath.row])
             cell.selectionStyle = .none
             return cell
         }
@@ -126,7 +134,9 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case .photoGallerySection:
-            return ProfileHeaderView()
+            let headerView = ProfileHeaderView()
+            headerView.configure(with: viewModel.user)
+            return headerView
         default:
             return nil
         }

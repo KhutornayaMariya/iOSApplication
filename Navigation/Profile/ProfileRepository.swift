@@ -1,12 +1,14 @@
 //
-//  PostRepository.swift
+//  ProfileRepository.swift
 //  Navigation
 //
 //  Created by m.khutornaya on 23.07.2022.
 //
 
-final class PostRepository {
-    let dataItems: [PostModel] = [
+import UIKit
+
+struct ProfileRepository {
+    let postItems: [PostModel] = [
         PostModel(author: "Vitalii", description: "I am so happy!", image: "1", likes: 3, views: 122),
         PostModel(author: "Timur", description: "Hello everyone!", image: "2", likes: 33, views: 54),
         PostModel(author: "Larisa", description: "welcome to my board", image: "3", likes: 23, views: 90),
@@ -17,4 +19,25 @@ final class PostRepository {
                   likes: 9,
                   views: 55)
     ]
+
+    let photoItems: [UIImage] = [UIImage(named: "one")!,
+                                UIImage(named: "two")!,
+                                UIImage(named: "three")!,
+                                UIImage(named: "four")!,
+                                UIImage(named: "five")!,
+                                UIImage(named: "six")!,
+                                UIImage(named: "seven")!,
+                                UIImage(named: "eight")!,
+                                UIImage(named: "nine")!,
+                                UIImage(named: "ten")!,
+                                UIImage(named: "eleven")!,
+                                UIImage(named: "twelve")!,
+                                UIImage(named: "thirteen")!,
+                                UIImage(named: "fourteen")!,
+                                UIImage(named: "fifteen")!,
+                                UIImage(named: "sixteen")!,
+                                UIImage(named: "seventeen")!,
+                                UIImage(named: "eighteen")!,
+                                UIImage(named: "nineteen")!,
+                                UIImage(named: "twenty")!]
 }
