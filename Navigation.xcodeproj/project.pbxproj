@@ -43,6 +43,8 @@
 		45D310572725A7CB0034F6A2 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D310562725A7CB0034F6A2 /* FeedView.swift */; };
 		45D3105D2725B3690034F6A2 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D3105C2725B3690034F6A2 /* InfoViewController.swift */; };
 		45D3105F2725B6120034F6A2 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D3105E2725B6120034F6A2 /* InfoView.swift */; };
+		45DFB8DD290AE26200702567 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DFB8DC290AE26200702567 /* NetworkManager.swift */; };
+		45DFB8DF290AF94500702567 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DFB8DE290AF94500702567 /* AppConfiguration.swift */; };
 		45E949D028E4560B00C48419 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E949CF28E4560B00C48419 /* Checker.swift */; };
 		45E949D328E4573A00C48419 /* LoginViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E949D228E4573A00C48419 /* LoginViewControllerDelegate.swift */; };
 		45E949D528E457FA00C48419 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E949D428E457FA00C48419 /* LoginInspector.swift */; };
@@ -112,6 +114,8 @@
 		45D3105A2725B0A40034F6A2 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		45D3105C2725B3690034F6A2 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		45D3105E2725B6120034F6A2 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		45DFB8DC290AE26200702567 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		45DFB8DE290AF94500702567 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		45E949CF28E4560B00C48419 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		45E949D228E4573A00C48419 /* LoginViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegate.swift; sourceTree = "<group>"; };
 		45E949D428E457FA00C48419 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
@@ -255,6 +259,7 @@
 				45D310632725BBBE0034F6A2 /* InfoView */,
 				45D310622725BBAD0034F6A2 /* FeedView */,
 				45D310612725BB870034F6A2 /* PostView */,
+				45DFB8DB290AE24E00702567 /* Network */,
 				45D31038272581B50034F6A2 /* AppDelegate.swift */,
 				45D3103A272581B50034F6A2 /* SceneDelegate.swift */,
 				45D3103C272581B50034F6A2 /* ViewController.swift */,
@@ -292,6 +297,15 @@
 				45D3105E2725B6120034F6A2 /* InfoView.swift */,
 			);
 			path = InfoView;
+			sourceTree = "<group>";
+		};
+		45DFB8DB290AE24E00702567 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				45DFB8DC290AE26200702567 /* NetworkManager.swift */,
+				45DFB8DE290AF94500702567 /* AppConfiguration.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		45E949CE28E455F800C48419 /* Checker */ = {
@@ -456,6 +470,8 @@
 				458198BC28EB2C1C00A5C852 /* RootTabBarViewController.swift in Sources */,
 				45D3105F2725B6120034F6A2 /* InfoView.swift in Sources */,
 				458198C528EB312F00A5C852 /* MainCoordinator.swift in Sources */,
+				45DFB8DD290AE26200702567 /* NetworkManager.swift in Sources */,
+				45DFB8DF290AF94500702567 /* AppConfiguration.swift in Sources */,
 				458198BE28EB2C6F00A5C852 /* Factory.swift in Sources */,
 				45229FB22883FA6900EF150F /* LogInViewController.swift in Sources */,
 				45AD682B28E1F59500E44A20 /* UserServiceProtocol.swift in Sources */,

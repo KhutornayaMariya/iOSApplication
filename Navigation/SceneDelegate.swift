@@ -10,7 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
-    
+    var appConfiguration: AppConfiguration = .people
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
@@ -23,6 +23,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
         let mainCoordinator = MainCoordinator()
         window.rootViewController = mainCoordinator.startApplication()
+
+        NetworkManager.request(for: appConfiguration)
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
