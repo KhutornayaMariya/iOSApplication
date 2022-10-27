@@ -10,9 +10,7 @@ import iOSIntPackage
 
 final class PhotosViewController: UIViewController {
 
-    var dataItems: [UIImage] = []
-
-    let imagePublisherFacade: ImagePublisherFacade = ImagePublisherFacade()
+    var dataItems: [UIImage] = ProfileRepository().photoItems
 
     private lazy var collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
@@ -46,24 +44,13 @@ final class PhotosViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        imagePublisherFacade.subscribe(self)
-        imagePublisherFacade.addImagesWithTimer(time: 0.5 ,repeat: 30, userImages: ProfileRepository().photoItems)
         setup()
+        applyImageFilter()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.isNavigationBarHidden = true
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        imagePublisherFacade.removeSubscription(for: self)
-    }
-
-    deinit {
-        imagePublisherFacade.rechargeImageLibrary()
-        imagePublisherFacade.removeSubscription(for: self)
     }
 
     // MARK: - Private methods
@@ -78,6 +65,21 @@ final class PhotosViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+
+    private func applyImageFilter() {
+        let startDefault = CFAbsoluteTimeGetCurrent()
+        ImageProcessor().processImagesOnThread(sourceImages: dataItems,
+                                               filter: .monochrome(color: .red, intensity: 1.0),
+                                               qos: .userInteractive) { result in
+            self.dataItems = result.compactMap { UIImage(cgImage: $0!) }
+            let end = CFAbsoluteTimeGetCurrent()
+            let time = end - startDefault
+            print("userInteractive time evaluated: \(time)")
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
     }
 
     private func createLayout() -> UICollectionViewLayout {
@@ -121,11 +123,4 @@ private extension NSCollectionLayoutSection {
 
 private extension CGFloat {
     static let inset: CGFloat = 8
-}
-
-extension PhotosViewController: ImageLibrarySubscriber {
-    func receive(images: [UIImage]) {
-        dataItems = images
-        collectionView.reloadData()
-    }
 }
