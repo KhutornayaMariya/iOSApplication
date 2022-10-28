@@ -9,4 +9,5 @@ import Foundation
 
 struct PlanetModel: Decodable {
     let orbitalPeriod: String
+    let residents: [String]
 }

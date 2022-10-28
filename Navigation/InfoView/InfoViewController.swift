@@ -10,13 +10,15 @@ import UIKit
 class InfoViewController: UIViewController {
     
     var networkManager: NetworkManagerProtocol = NetworkManager()
-
+    var residentUrls: [String] = []
+    
     private lazy var infoView: InfoView = {
         let view = InfoView()
-
+        
         view.onTapButtonHandler = openAlert
+        view.onTapResidentsButtonHandler = openPlanetResidentsViewController
         view.translatesAutoresizingMaskIntoConstraints = false
-
+        
         return view
     }()
     
@@ -31,19 +33,19 @@ class InfoViewController: UIViewController {
         
         alert.addAction(negative)
         alert.addAction(positive)
-
+        
         return alert
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchTitle()
-        fetchOrbitalPeriod()
+        fetchPlanetData()
         setUp()
     }
-
+    
     // MARK: Lifecycle
-
+    
     init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -56,11 +58,16 @@ class InfoViewController: UIViewController {
     func openAlert() {
         present(alert, animated: true, completion: nil)
     }
-
+    
+    @objc
+    func openPlanetResidentsViewController() {
+        present(PlanetResidentsViewController(model: PlanetResidentsModel(urls: residentUrls)), animated: true, completion: nil)
+    }
+    
     private func setUp() {
         view.backgroundColor = .systemMint
         view.addSubview(infoView)
-
+        
         NSLayoutConstraint.activate([
             infoView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             infoView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -68,16 +75,16 @@ class InfoViewController: UIViewController {
             infoView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-
+    
     private func fetchTitle() {
         guard let url = URL(string: .url) else { return }
-
+        
         networkManager.request(url: url) { [weak self] result in
             switch result {
             case .success(let data):
                 do {
                     let object = try JSONSerialization.jsonObject(with: data, options: [])
-
+                    
                     if let dictionary = object as? [[String: Any]] {
                         let title = dictionary.first?["title"] as? String ?? ""
                         self?.infoView.configureTitle(with: title)
@@ -85,16 +92,16 @@ class InfoViewController: UIViewController {
                 } catch let error {
                     print("🍎", error)
                 }
-
+                
             case .failure(let error):
                 print("🍎", error)
             }
         }
     }
-
-    private func fetchOrbitalPeriod() {
+    
+    private func fetchPlanetData() {
         guard let url = URL(string: .planetUrl) else { return }
-
+        
         networkManager.request(url: url) { [weak self] result in
             switch result {
             case .success(let data):
@@ -104,10 +111,11 @@ class InfoViewController: UIViewController {
                     let planetData = try decoder.decode(PlanetModel.self, from: data)
                     let orbitalPeriod = planetData.orbitalPeriod
                     self?.infoView.configurePeriodTitle(with: orbitalPeriod)
+                    self?.residentUrls = planetData.residents
                 } catch let error {
                     print("🍎", error)
                 }
-
+                
             case .failure(let error):
                 print("🍎", error)
             }
@@ -120,7 +128,7 @@ private extension String {
     static let alertMessage: String = "Tracker of your mood"
     static let alertPositiveText: String = "I'am OK"
     static let alertNegativeText: String = "Not so good"
-
+    
     static let url: String = "https://jsonplaceholder.typicode.com/todos/"
     static let planetUrl: String = "https://swapi.dev/api/planets/1"
 }

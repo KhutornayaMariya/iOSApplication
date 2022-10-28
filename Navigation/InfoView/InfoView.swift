@@ -28,6 +28,13 @@ class InfoView: UIView {
 
         return view
     }()
+
+    private lazy var residentsButton: CustomButton = {
+        let button = CustomButton(title: .residentsButtonText, titleColor: .blue)
+        button.backgroundColor = .white
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     private lazy var button: CustomButton = {
         let button = CustomButton(title: .buttonText, titleColor: .blue)
@@ -39,6 +46,12 @@ class InfoView: UIView {
     public var onTapButtonHandler: (() -> Void)? {
         didSet {
             button.addTarget(self, action: #selector(tapWrapper), for: .touchUpInside)
+        }
+    }
+
+    public var onTapResidentsButtonHandler: (() -> Void)? {
+        didSet {
+            residentsButton.addTarget(self, action: #selector(tapResidentsWrapper), for: .touchUpInside)
         }
     }
 
@@ -56,7 +69,7 @@ class InfoView: UIView {
     }
     
     func setUp() {
-        let subviews = [button, title, periodTitle]
+        let subviews = [button, title, periodTitle, residentsButton]
         subviews.forEach { addSubview($0) }
 
         NSLayoutConstraint.activate([
@@ -66,6 +79,11 @@ class InfoView: UIView {
             periodTitle.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 40),
             periodTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             periodTitle.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+
+            residentsButton.widthAnchor.constraint(equalToConstant: .width),
+            residentsButton.heightAnchor.constraint(equalToConstant: .height),
+            residentsButton.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -40),
+            residentsButton.centerXAnchor.constraint(equalTo: centerXAnchor),
 
             button.widthAnchor.constraint(equalToConstant: .width),
             button.heightAnchor.constraint(equalToConstant: .height),
@@ -82,6 +100,11 @@ class InfoView: UIView {
     private func tapWrapper() {
         self.onTapButtonHandler?()
     }
+
+    @objc
+    private func tapResidentsWrapper() {
+        self.onTapResidentsButtonHandler?()
+    }
 }
 
 private extension CGFloat {
@@ -91,4 +114,5 @@ private extension CGFloat {
 
 private extension String {
     static let buttonText = "Tap here"
+    static let residentsButtonText = "Show planet residents"
 }
