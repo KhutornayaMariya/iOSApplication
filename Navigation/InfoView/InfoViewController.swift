@@ -36,7 +36,7 @@ class InfoViewController: UIViewController {
     override func loadView() {
         let view = InfoView()
         self.view = view
-        view.button.addTarget(self, action: #selector(openAlert), for: .touchUpInside)
+        view.onTapButtonHandler = openAlert
     }
     
     override func viewDidLoad() {
