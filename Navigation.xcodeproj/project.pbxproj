@@ -46,6 +46,7 @@
 		45DFB8DD290AE26200702567 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DFB8DC290AE26200702567 /* NetworkManager.swift */; };
 		45DFB8DF290AF94500702567 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DFB8DE290AF94500702567 /* AppConfiguration.swift */; };
 		45DFB8E3290BDC8C00702567 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DFB8E2290BDC8C00702567 /* NetworkError.swift */; };
+		45DFB8E5290BEAA000702567 /* PlanetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DFB8E4290BEAA000702567 /* PlanetModel.swift */; };
 		45E949D028E4560B00C48419 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E949CF28E4560B00C48419 /* Checker.swift */; };
 		45E949D328E4573A00C48419 /* LoginViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E949D228E4573A00C48419 /* LoginViewControllerDelegate.swift */; };
 		45E949D528E457FA00C48419 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E949D428E457FA00C48419 /* LoginInspector.swift */; };
@@ -118,6 +119,7 @@
 		45DFB8DC290AE26200702567 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		45DFB8DE290AF94500702567 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		45DFB8E2290BDC8C00702567 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		45DFB8E4290BEAA000702567 /* PlanetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetModel.swift; sourceTree = "<group>"; };
 		45E949CF28E4560B00C48419 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		45E949D228E4573A00C48419 /* LoginViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegate.swift; sourceTree = "<group>"; };
 		45E949D428E457FA00C48419 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 			children = (
 				45D3105C2725B3690034F6A2 /* InfoViewController.swift */,
 				45D3105E2725B6120034F6A2 /* InfoView.swift */,
+				45DFB8E4290BEAA000702567 /* PlanetModel.swift */,
 			);
 			path = InfoView;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				458198C228EB2EA800A5C852 /* FeedCoordinator.swift in Sources */,
 				458198B928EAE5BA00A5C852 /* FeedModel.swift in Sources */,
 				458198C028EB2E8B00A5C852 /* ProfileCoordinator.swift in Sources */,
+				45DFB8E5290BEAA000702567 /* PlanetModel.swift in Sources */,
 				45D3104D272588D70034F6A2 /* TabBarController.swift in Sources */,
 				45A72954288BE92200107918 /* ProfileRepository.swift in Sources */,
 				45229FB92884386700EF150F /* PostModel.swift in Sources */,

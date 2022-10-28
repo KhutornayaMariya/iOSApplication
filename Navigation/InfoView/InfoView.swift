@@ -12,7 +12,17 @@ class InfoView: UIView {
     private lazy var title: UILabel = {
         let view = UILabel()
 
-        view.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        view.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        view.textColor = .black
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        return view
+    }()
+
+    private lazy var periodTitle: UILabel = {
+        let view = UILabel()
+
+        view.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         view.textColor = .black
         view.translatesAutoresizingMaskIntoConstraints = false
 
@@ -32,13 +42,12 @@ class InfoView: UIView {
         }
     }
 
-    public func configure(with text: String?) {
-        guard let text = text else {
-            title.isHidden = true
-            print("title is nil")
-            return
-        }
+    public func configureTitle(with text: String) {
         title.text = text
+    }
+
+    public func configurePeriodTitle(with text: String) {
+        periodTitle.text = "Orbital period of Tatooine: " + text
     }
     
     override init(frame: CGRect) {
@@ -47,12 +56,16 @@ class InfoView: UIView {
     }
     
     func setUp() {
-        let subviews = [button, title]
+        let subviews = [button, title, periodTitle]
         subviews.forEach { addSubview($0) }
 
         NSLayoutConstraint.activate([
             title.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
             title.centerXAnchor.constraint(equalTo: centerXAnchor),
+
+            periodTitle.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 40),
+            periodTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            periodTitle.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
 
             button.widthAnchor.constraint(equalToConstant: .width),
             button.heightAnchor.constraint(equalToConstant: .height),

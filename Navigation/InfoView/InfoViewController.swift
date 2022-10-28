@@ -38,6 +38,7 @@ class InfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchTitle()
+        fetchOrbitalPeriod()
         setUp()
     }
 
@@ -78,9 +79,31 @@ class InfoViewController: UIViewController {
                     let object = try JSONSerialization.jsonObject(with: data, options: [])
 
                     if let dictionary = object as? [[String: Any]] {
-                        let title = dictionary.first?["title"] as? String
-                        self?.infoView.configure(with: title)
+                        let title = dictionary.first?["title"] as? String ?? ""
+                        self?.infoView.configureTitle(with: title)
                     }
+                } catch let error {
+                    print("🍎", error)
+                }
+
+            case .failure(let error):
+                print("🍎", error)
+            }
+        }
+    }
+
+    private func fetchOrbitalPeriod() {
+        guard let url = URL(string: .planetUrl) else { return }
+
+        networkManager.request(url: url) { [weak self] result in
+            switch result {
+            case .success(let data):
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    let planetData = try decoder.decode(PlanetModel.self, from: data)
+                    let orbitalPeriod = planetData.orbitalPeriod
+                    self?.infoView.configurePeriodTitle(with: orbitalPeriod)
                 } catch let error {
                     print("🍎", error)
                 }
@@ -99,4 +122,5 @@ private extension String {
     static let alertNegativeText: String = "Not so good"
 
     static let url: String = "https://jsonplaceholder.typicode.com/todos/"
+    static let planetUrl: String = "https://swapi.dev/api/planets/1"
 }
