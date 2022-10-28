@@ -7,25 +7,31 @@
 
 import Foundation
 
-struct NetworkManager {
+protocol NetworkManagerProtocol {
+    func request(url: URL, completion: @escaping (Result<Data, NetworkError>) -> Void)
+}
 
-    static func request(for configuration: AppConfiguration) {
-        guard let url = configuration.url else { return }
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let data = data {
-                print("data: \(String(data: data, encoding: .utf8) ?? "") \n")
+final class NetworkManager {
+
+    private let mainQueue = DispatchQueue.main
+}
+
+extension NetworkManager: NetworkManagerProtocol {
+
+    func request(url: URL, completion: @escaping (Result<Data, NetworkError>) -> Void) {
+        let task = URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
+            guard error == nil else {
+                self.mainQueue.async { completion(.failure(.default)) }
+                return
             }
 
-            if let response = response as? HTTPURLResponse {
-                print("response.statusCode: \(response.statusCode) \n")
-                print("response.allHeaderFields: \(response.allHeaderFields)")
+            guard let data = data else {
+                self.mainQueue.async { completion(.failure(.unknownError)) }
+                return
             }
 
-            if let error = error {
-                print("error: \(error.localizedDescription)")
-//            error: The Internet connection appears to be offline.
-            }
-        }
+            self.mainQueue.async { completion(.success(data)) }
+        })
 
         task.resume()
     }
