@@ -9,38 +9,42 @@ import UIKit
 
 class InfoViewController: UIViewController {
     
-    var backgroundColor: UIColor = .white
+    var networkManager: NetworkManagerProtocol = NetworkManager()
+
+    private lazy var infoView: InfoView = {
+        let view = InfoView()
+
+        view.onTapButtonHandler = openAlert
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        return view
+    }()
     
-    var alert: UIAlertController = {
+    private lazy var alert: UIAlertController = {
         let alert = UIAlertController(title: .alertTitle, message: .alertMessage, preferredStyle: .alert)
-        let positive = UIAlertAction(title: .alertPositiveText, style: .default) {
-            UIAlertAction in
+        let positive = UIAlertAction(title: .alertPositiveText, style: .default) { UIAlertAction in
             print(String.alertPositiveText)
         }
-        let negative = UIAlertAction(title: .alertNegativeText, style: .default) {
-            UIAlertAction in
+        let negative = UIAlertAction(title: .alertNegativeText, style: .default) { UIAlertAction in
             print(String.alertNegativeText)
         }
         
         alert.addAction(negative)
         alert.addAction(positive)
-       
+
         return alert
     }()
     
-    init(_ color:UIColor) {
-        super.init(nibName: nil, bundle: nil)
-        backgroundColor = color
-    }
-    
-    override func loadView() {
-        let view = InfoView()
-        self.view = view
-        view.onTapButtonHandler = openAlert
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchTitle()
+        setUp()
+    }
+
+    // MARK: Lifecycle
+
+    init() {
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -51,6 +55,41 @@ class InfoViewController: UIViewController {
     func openAlert() {
         present(alert, animated: true, completion: nil)
     }
+
+    private func setUp() {
+        view.backgroundColor = .systemMint
+        view.addSubview(infoView)
+
+        NSLayoutConstraint.activate([
+            infoView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            infoView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            infoView.topAnchor.constraint(equalTo: view.topAnchor),
+            infoView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+
+    private func fetchTitle() {
+        guard let url = URL(string: .url) else { return }
+
+        networkManager.request(url: url) { [weak self] result in
+            switch result {
+            case .success(let data):
+                do {
+                    let object = try JSONSerialization.jsonObject(with: data, options: [])
+
+                    if let dictionary = object as? [[String: Any]] {
+                        let title = dictionary.first?["title"] as? String
+                        self?.infoView.configure(with: title)
+                    }
+                } catch let error {
+                    print("🍎", error)
+                }
+
+            case .failure(let error):
+                print("🍎", error)
+            }
+        }
+    }
 }
 
 private extension String {
@@ -58,4 +97,6 @@ private extension String {
     static let alertMessage: String = "Tracker of your mood"
     static let alertPositiveText: String = "I'am OK"
     static let alertNegativeText: String = "Not so good"
+
+    static let url: String = "https://jsonplaceholder.typicode.com/todos/"
 }

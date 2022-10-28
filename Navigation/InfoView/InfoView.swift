@@ -31,17 +31,29 @@ class InfoView: UIView {
             button.addTarget(self, action: #selector(tapWrapper), for: .touchUpInside)
         }
     }
-    
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = .purple
-        self.isOpaque = false
-        addSubview(button)
-        configureLayout()
+
+    public func configure(with text: String?) {
+        guard let text = text else {
+            title.isHidden = true
+            print("title is nil")
+            return
+        }
+        title.text = text
     }
     
-    func configureLayout() {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setUp()
+    }
+    
+    func setUp() {
+        let subviews = [button, title]
+        subviews.forEach { addSubview($0) }
+
         NSLayoutConstraint.activate([
+            title.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            title.centerXAnchor.constraint(equalTo: centerXAnchor),
+
             button.widthAnchor.constraint(equalToConstant: .width),
             button.heightAnchor.constraint(equalToConstant: .height),
             button.centerXAnchor.constraint(equalTo: centerXAnchor),

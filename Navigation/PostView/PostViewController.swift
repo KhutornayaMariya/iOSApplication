@@ -13,16 +13,16 @@ class PostViewController: UIViewController {
     var post: Post
     var backgroundColor: UIColor = .white
     
-    init(_ color:UIColor, _ post:Post) {
+    init(_ color: UIColor, _ post: Post) {
         self.post = post
         super.init(nibName: nil, bundle: nil)
         backgroundColor = color
         let infoButtonItem = UIBarButtonItem(
-                    image: UIImage(systemName: "info"),
-                    style: UIBarButtonItem.Style.plain,
-                    target: self,
-                    action: #selector(openInfoButtomSheet)
-                )
+            image: UIImage(systemName: "info"),
+            style: UIBarButtonItem.Style.plain,
+            target: self,
+            action: #selector(openInfoButtomSheet)
+        )
         navigationItem.rightBarButtonItem = infoButtonItem
     }
     
@@ -42,6 +42,6 @@ class PostViewController: UIViewController {
     
     @objc
     func openInfoButtomSheet() {
-        present(InfoViewController(.lightGray), animated: true, completion: nil)
+        present(InfoViewController(), animated: true, completion: nil)
     }
 }
