@@ -11,6 +11,7 @@ import FirebaseAuth
 final class LogInViewController: UIViewController {
 
     private let nc = NotificationCenter.default
+    private var handle: AuthStateDidChangeListenerHandle?
 
     static var loginDelegate: LoginViewControllerDelegate?
 
@@ -19,6 +20,7 @@ final class LogInViewController: UIViewController {
 
         view.translatesAutoresizingMaskIntoConstraints = false
         view.onTapButtonHandler = didTapLoginButton
+        view.onTapSignInButtonHandler = didTapSignInButton
 
         return view
     }()
@@ -52,11 +54,17 @@ final class LogInViewController: UIViewController {
 
         nc.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         nc.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+
+        handle = Auth.auth().addStateDidChangeListener { auth, user in
+          // ...
+        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         nc.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        Auth.auth().removeStateDidChangeListener(handle!)
+        
         loginView.cleanInputs()
     }
 
@@ -93,15 +101,23 @@ final class LogInViewController: UIViewController {
         let userService = CurrentUserService()
 #endif
 
-        guard let loginDelegate = LogInViewController.loginDelegate,
-              loginDelegate.check(login: loginView.getLogin(), password: loginView.getPassword())
-        else {
-            present(alert, animated: true, completion: nil)
-            return
-        }
+        guard let loginDelegate = LogInViewController.loginDelegate else { return }
 
-        let profileModel = ProfileViewModel(user: userService.getUser())
-        navigationController?.pushViewController(ProfileViewController(viewModel: profileModel), animated: true)
+        loginDelegate.checkCredentials(email: loginView.getLogin(), password: loginView.getPassword()) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(_):
+                let profileModel = ProfileViewModel(user: userService.getUser())
+                self.navigationController?.pushViewController(ProfileViewController(viewModel: profileModel), animated: true)
+            case .failure(_):
+                self.present(self.alert, animated: true, completion: nil)
+            }
+        }
+    }
+
+    @objc
+    private func didTapSignInButton() {
+        present(RegistrationViewController(delegate: LogInViewController.loginDelegate), animated: true)
     }
 }
 

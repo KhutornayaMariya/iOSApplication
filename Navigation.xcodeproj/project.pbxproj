@@ -40,6 +40,10 @@
 		45CA0713290D3978009D0815 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 45CA0712290D3978009D0815 /* FirebaseFirestore */; };
 		45CA0715290D3978009D0815 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 45CA0714290D3978009D0815 /* FirebaseStorage */; };
 		45CA0717290D3C27009D0815 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CA0716290D3C27009D0815 /* LoginView.swift */; };
+		45CA071D290D563B009D0815 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CA071C290D563B009D0815 /* RegistrationView.swift */; };
+		45CA071F290D5711009D0815 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CA071E290D5711009D0815 /* RegistrationViewController.swift */; };
+		45CA0721290D5F2E009D0815 /* CheckerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CA0720290D5F2E009D0815 /* CheckerService.swift */; };
+		45CA0723290D5F51009D0815 /* CheckerServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CA0722290D5F51009D0815 /* CheckerServiceProtocol.swift */; };
 		45D31039272581B50034F6A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D31038272581B50034F6A2 /* AppDelegate.swift */; };
 		45D3103B272581B50034F6A2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D3103A272581B50034F6A2 /* SceneDelegate.swift */; };
 		45D3103D272581B50034F6A2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D3103C272581B50034F6A2 /* ViewController.swift */; };
@@ -114,6 +118,10 @@
 		45AD682E28E2057400E44A20 /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
 		45CA0707290D3770009D0815 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		45CA0716290D3C27009D0815 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		45CA071C290D563B009D0815 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		45CA071E290D5711009D0815 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		45CA0720290D5F2E009D0815 /* CheckerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerService.swift; sourceTree = "<group>"; };
+		45CA0722290D5F51009D0815 /* CheckerServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerServiceProtocol.swift; sourceTree = "<group>"; };
 		45D31035272581B50034F6A2 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45D31038272581B50034F6A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45D3103A272581B50034F6A2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -259,6 +267,34 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		45CA0719290D5605009D0815 /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				45CA0720290D5F2E009D0815 /* CheckerService.swift */,
+				45CA0722290D5F51009D0815 /* CheckerServiceProtocol.swift */,
+				45CA071A290D561E009D0815 /* Registration */,
+				45E949D128E4571F00C48419 /* Login */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
+		45CA071A290D561E009D0815 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				45CA071B290D562B009D0815 /* View */,
+				45CA071E290D5711009D0815 /* RegistrationViewController.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		45CA071B290D562B009D0815 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				45CA071C290D563B009D0815 /* RegistrationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		45D3102C272581B50034F6A2 = {
 			isa = PBXGroup;
 			children = (
@@ -280,11 +316,11 @@
 		45D31037272581B50034F6A2 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				45CA0719290D5605009D0815 /* Authorization */,
 				454FDE2A28EC6AB7000F8986 /* PhotoGallery */,
 				458198C328EB311C00A5C852 /* MainCoordinator */,
 				458198BA28EB2B1100A5C852 /* RootTabBarViewController */,
 				458198B528EAC46A00A5C852 /* Views */,
-				45E949D128E4571F00C48419 /* Login */,
 				45E949CE28E455F800C48419 /* Checker */,
 				45AD682728E1F50800E44A20 /* User */,
 				45229FAC2883D63300EF150F /* Profile */,
@@ -510,6 +546,7 @@
 				45E949D728E4644200C48419 /* MyLoginFactory.swift in Sources */,
 				45D3105527259D0F0034F6A2 /* PostViewController.swift in Sources */,
 				45AD682D28E1F5F300E44A20 /* CurrentUserService.swift in Sources */,
+				45CA071D290D563B009D0815 /* RegistrationView.swift in Sources */,
 				45AD682F28E2057400E44A20 /* TestUserService.swift in Sources */,
 				45229FC22884777000EF150F /* PhotosViewController.swift in Sources */,
 				45D310572725A7CB0034F6A2 /* FeedView.swift in Sources */,
@@ -519,8 +556,10 @@
 				458198B928EAE5BA00A5C852 /* FeedModel.swift in Sources */,
 				458198C028EB2E8B00A5C852 /* ProfileCoordinator.swift in Sources */,
 				45DFB8E5290BEAA000702567 /* PlanetModel.swift in Sources */,
+				45CA0721290D5F2E009D0815 /* CheckerService.swift in Sources */,
 				45D3104D272588D70034F6A2 /* TabBarController.swift in Sources */,
 				45A72954288BE92200107918 /* ProfileRepository.swift in Sources */,
+				45CA0723290D5F51009D0815 /* CheckerServiceProtocol.swift in Sources */,
 				45229FB92884386700EF150F /* PostModel.swift in Sources */,
 				458198BC28EB2C1C00A5C852 /* RootTabBarViewController.swift in Sources */,
 				45D3105F2725B6120034F6A2 /* InfoView.swift in Sources */,
@@ -528,6 +567,7 @@
 				45DFB8DD290AE26200702567 /* NetworkManager.swift in Sources */,
 				45DFB8DF290AF94500702567 /* AppConfiguration.swift in Sources */,
 				458198BE28EB2C6F00A5C852 /* Factory.swift in Sources */,
+				45CA071F290D5711009D0815 /* RegistrationViewController.swift in Sources */,
 				45229FB22883FA6900EF150F /* LogInViewController.swift in Sources */,
 				45AD682B28E1F59500E44A20 /* UserServiceProtocol.swift in Sources */,
 				45229FC428847BB400EF150F /* PhotosCollectionViewCell.swift in Sources */,
