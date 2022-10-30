@@ -107,6 +107,7 @@ class LoginView: UIView {
         view.layer.cornerRadius = 10
         view.layer.masksToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.isEnabled = false
 
         return view
     }()
@@ -219,6 +220,13 @@ extension LoginView {
     public func cleanInputs() {
         inputPasswordField.text = nil
         inputLoginField.text = nil
+        loginButton.isEnabled = false
+        signInButton.isEnabled = false
+    }
+
+    public func disableButtons() {
+        loginButton.isEnabled = false
+        signInButton.isEnabled = false
     }
 
     public func getLogin() -> String {
@@ -239,8 +247,10 @@ extension LoginView: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         if isInputsFilled() {
             loginButton.isEnabled = true
+            signInButton.isEnabled = true
         } else {
             loginButton.isEnabled = false
+            signInButton.isEnabled = false
         }
     }
 }

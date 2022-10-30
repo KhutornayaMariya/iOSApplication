@@ -25,14 +25,6 @@ final class LogInViewController: UIViewController {
         return view
     }()
 
-    private let alert: UIAlertController = {
-        let alert = UIAlertController(title: String.alertTitle, message: String.alertMessage, preferredStyle: .alert)
-        let action = UIAlertAction(title: String.alertAction, style: .default, handler: nil)
-        alert.addAction(action)
-
-        return alert
-    }()
-
     // MARK: Lifecycle
 
     init() {
@@ -56,7 +48,7 @@ final class LogInViewController: UIViewController {
         nc.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 
         handle = Auth.auth().addStateDidChangeListener { auth, user in
-          // ...
+            // ...
         }
     }
 
@@ -66,6 +58,7 @@ final class LogInViewController: UIViewController {
         Auth.auth().removeStateDidChangeListener(handle!)
         
         loginView.cleanInputs()
+        loginView.disableButtons()
     }
 
     private func setUp() {
@@ -103,26 +96,88 @@ final class LogInViewController: UIViewController {
 
         guard let loginDelegate = LogInViewController.loginDelegate else { return }
 
-        loginDelegate.checkCredentials(email: loginView.getLogin(), password: loginView.getPassword()) { [weak self] result in
+        loginDelegate.checkCredentials(email: loginView.getLogin(),
+                                       password: loginView.getPassword())
+        { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(_):
                 let profileModel = ProfileViewModel(user: userService.getUser())
                 self.navigationController?.pushViewController(ProfileViewController(viewModel: profileModel), animated: true)
-            case .failure(_):
-                self.present(self.alert, animated: true, completion: nil)
+            case .failure(let error):
+                print(error)
+                self.showAlert(alertTitle: .signUpError, errorCode: error.code)
             }
         }
     }
 
     @objc
     private func didTapSignInButton() {
-        present(RegistrationViewController(delegate: LogInViewController.loginDelegate), animated: true)
+#if DEBUG
+        let userService = TestUserService()
+#else
+        let userService = CurrentUserService()
+#endif
+
+        guard let loginDelegate = LogInViewController.loginDelegate else { return }
+
+        loginDelegate.signUp(email: loginView.getLogin(),
+                             password: loginView.getPassword())
+        { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(_):
+                let profileModel = ProfileViewModel(user: userService.getUser())
+                self.navigationController?.pushViewController(ProfileViewController(viewModel: profileModel), animated: true)
+            case .failure(let error):
+                print(error)
+                self.showAlert(alertTitle: .signInError, errorCode: error.code)
+            }
+        }
+    }
+
+    private func showAlert( alertTitle: String, errorCode: Int) {
+        let message = getAlertMessage(errorCode: errorCode)
+
+        let alertController = UIAlertController(title: alertTitle, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: String.alertAction, style: .default, handler: nil)
+        alertController.addAction(action)
+
+        present(alertController, animated: true)
+    }
+
+    private func getAlertMessage(errorCode: Int) -> String {
+        switch errorCode {
+        case .shortPasswordErrorCode:
+            return .shortPassword
+        case .noSuchUserErrorCode:
+            return .noSuchUserError
+        case .invalidEmailAddressErrorCode:
+            return .invalidEmailAddress
+        case .wrongCredsErrorCode:
+            return .wrongCredsError
+        default:
+            return .errorMessage
+        }
     }
 }
 
 private extension String {
-    static let alertTitle = "Ошибка авторизации"
-    static let alertMessage = "Введенные вами логин или пароль неверные"
+    static let signUpError = "Ошибка авторизации"
+    static let wrongCredsError = "Введенные вами логин или пароль неверные"
+    static let noSuchUserError =  "Пользователь не найден. Проверьте правильность логина или зарегистрируйтесь"
+
+    static let signInError = "Ошибка регистрации"
+    static let shortPassword = "Пароль должен содержать как минимум 6 символов"
+
     static let alertAction = "Повторить"
+    static let errorMessage = "Произошла ошибка. Повторите позже"
+    static let invalidEmailAddress = "Некорректный формат email. Убедитесь, что email соответствует формату example@ex.com"
+}
+
+private extension Int {
+    static let shortPasswordErrorCode = 17026
+    static let noSuchUserErrorCode =  17011
+    static let wrongCredsErrorCode =  17009
+    static let invalidEmailAddressErrorCode = 17008
 }
