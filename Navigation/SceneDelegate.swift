@@ -6,12 +6,12 @@
 //
 
 import UIKit
-import FirebaseAuth
 import FirebaseCore
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
+    private typealias auth = FirebaseAuthorization.auth
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
@@ -33,7 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
         // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
         do {
-            try Auth.auth().signOut()
+            try auth.auth().signOut()
         } catch {
             print("Произошла ошибка при разлогине")
             return

@@ -6,11 +6,14 @@
 //
 
 import Foundation
-import FirebaseAuth
 
 final class CheckerService: CheckerServiceProtocol {
-    func checkCredentials(email: String, password: String, completion: @escaping (Result<AuthDataResult, NSError>) -> Void) {
-        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+
+    public typealias data = FirebaseAuthorization.data
+    public typealias auth = FirebaseAuthorization.auth
+    
+    func checkCredentials(email: String, password: String, completion: @escaping (Result<data, NSError>) -> Void) {
+        auth.auth().signIn(withEmail: email, password: password) { result, error in
             guard error == nil,
                   let result = result else {
                 completion(.failure(error! as NSError))
@@ -21,8 +24,8 @@ final class CheckerService: CheckerServiceProtocol {
         }
     }
 
-    func signUp(email: String, password: String, completion: @escaping (Result<AuthDataResult, NSError>) -> Void) {
-        Auth.auth().createUser(withEmail: email, password: password) { result, error in
+    func signUp(email: String, password: String, completion: @escaping (Result<data, NSError>) -> Void) {
+        auth.auth().createUser(withEmail: email, password: password) { result, error in
             guard error == nil,
                   let result = result else {
                 completion(.failure(error! as NSError))

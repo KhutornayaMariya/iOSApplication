@@ -42,6 +42,7 @@
 		45CA0717290D3C27009D0815 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CA0716290D3C27009D0815 /* LoginView.swift */; };
 		45CA0721290D5F2E009D0815 /* CheckerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CA0720290D5F2E009D0815 /* CheckerService.swift */; };
 		45CA0723290D5F51009D0815 /* CheckerServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CA0722290D5F51009D0815 /* CheckerServiceProtocol.swift */; };
+		45CA0727290E4DCA009D0815 /* FirebaseAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CA0726290E4DCA009D0815 /* FirebaseAuthorization.swift */; };
 		45D31039272581B50034F6A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D31038272581B50034F6A2 /* AppDelegate.swift */; };
 		45D3103B272581B50034F6A2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D3103A272581B50034F6A2 /* SceneDelegate.swift */; };
 		45D3103D272581B50034F6A2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D3103C272581B50034F6A2 /* ViewController.swift */; };
@@ -118,6 +119,7 @@
 		45CA0716290D3C27009D0815 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		45CA0720290D5F2E009D0815 /* CheckerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerService.swift; sourceTree = "<group>"; };
 		45CA0722290D5F51009D0815 /* CheckerServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerServiceProtocol.swift; sourceTree = "<group>"; };
+		45CA0726290E4DCA009D0815 /* FirebaseAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthorization.swift; sourceTree = "<group>"; };
 		45D31035272581B50034F6A2 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45D31038272581B50034F6A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45D3103A272581B50034F6A2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				45CA0720290D5F2E009D0815 /* CheckerService.swift */,
 				45CA0722290D5F51009D0815 /* CheckerServiceProtocol.swift */,
 				45E949D128E4571F00C48419 /* Login */,
+				45CA0726290E4DCA009D0815 /* FirebaseAuthorization.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				45DFB8DF290AF94500702567 /* AppConfiguration.swift in Sources */,
 				458198BE28EB2C6F00A5C852 /* Factory.swift in Sources */,
 				45229FB22883FA6900EF150F /* LogInViewController.swift in Sources */,
+				45CA0727290E4DCA009D0815 /* FirebaseAuthorization.swift in Sources */,
 				45AD682B28E1F59500E44A20 /* UserServiceProtocol.swift in Sources */,
 				45229FC428847BB400EF150F /* PhotosCollectionViewCell.swift in Sources */,
 				45D31039272581B50034F6A2 /* AppDelegate.swift in Sources */,

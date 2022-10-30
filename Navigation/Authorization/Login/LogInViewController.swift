@@ -6,12 +6,12 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 final class LogInViewController: UIViewController {
 
+    private typealias auth = FirebaseAuthorization.auth
     private let nc = NotificationCenter.default
-    private var handle: AuthStateDidChangeListenerHandle?
+    private var handle: FirebaseAuthorization.listener?
 
     static var loginDelegate: LoginViewControllerDelegate?
 
@@ -47,7 +47,7 @@ final class LogInViewController: UIViewController {
         nc.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         nc.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 
-        handle = Auth.auth().addStateDidChangeListener { auth, user in
+        handle = auth.auth().addStateDidChangeListener { auth, user in
             // ...
         }
     }
@@ -55,7 +55,7 @@ final class LogInViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         nc.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        Auth.auth().removeStateDidChangeListener(handle!)
+        auth.auth().removeStateDidChangeListener(handle!)
         
         loginView.cleanInputs()
         loginView.disableButtons()

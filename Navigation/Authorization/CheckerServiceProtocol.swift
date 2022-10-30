@@ -6,9 +6,8 @@
 //
 
 import Foundation
-import FirebaseAuth
 
 protocol CheckerServiceProtocol {
-    func checkCredentials(email: String, password: String, completion: @escaping (Result<AuthDataResult, NSError>) -> Void)
-    func signUp(email: String, password: String, completion: @escaping (Result<AuthDataResult, NSError>) -> Void)
+    func checkCredentials(email: String, password: String, completion: @escaping (Result<FirebaseAuthorization.data, NSError>) -> Void)
+    func signUp(email: String, password: String, completion: @escaping (Result<FirebaseAuthorization.data, NSError>) -> Void)
 }
