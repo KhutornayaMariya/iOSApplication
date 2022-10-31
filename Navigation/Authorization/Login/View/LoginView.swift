@@ -100,27 +100,9 @@ class LoginView: UIView {
         return view
     }()
 
-    private lazy var signInButton: CustomButton = {
-        let view = CustomButton(title: "Зарегистрироваться", titleColor: .white)
-
-        view.backgroundColor = .systemGreen
-        view.layer.cornerRadius = 10
-        view.layer.masksToBounds = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.isEnabled = false
-
-        return view
-    }()
-
     public var onTapButtonHandler: (() -> Void)? {
         didSet {
             loginButton.addTarget(self, action: #selector(tapWrapper), for: .touchUpInside)
-        }
-    }
-
-    public var onTapSignInButtonHandler: (() -> Void)? {
-        didSet {
-            signInButton.addTarget(self, action: #selector(tapSignInWrapper), for: .touchUpInside)
         }
     }
 
@@ -138,7 +120,7 @@ class LoginView: UIView {
         addSubview(scrollView)
         scrollView.addSubview(contentView)
 
-        let subviews = [logo, backgroundView, loginButton, signInButton]
+        let subviews = [logo, backgroundView, loginButton]
         subviews.forEach { contentView.addSubview($0) }
 
         [inputLoginField, inputPasswordField, separator].forEach { backgroundView.addSubview($0) }
@@ -171,6 +153,7 @@ class LoginView: UIView {
             loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .safeArea),
             loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.safeArea),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
+            loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
 
             inputLoginField.topAnchor.constraint(equalTo: backgroundView.topAnchor),
             inputLoginField.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: .safeArea),
@@ -185,24 +168,13 @@ class LoginView: UIView {
             inputPasswordField.topAnchor.constraint(equalTo: inputLoginField.bottomAnchor),
             inputPasswordField.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: .safeArea),
             inputPasswordField.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -.safeArea),
-            inputPasswordField.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor),
-
-            signInButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: .safeArea),
-            signInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .safeArea),
-            signInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.safeArea),
-            signInButton.heightAnchor.constraint(equalToConstant: 50),
-            signInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            inputPasswordField.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor)
         ])
     }
 
     @objc
     private func tapWrapper() {
         self.onTapButtonHandler?()
-    }
-
-    @objc
-    private func tapSignInWrapper() {
-        self.onTapSignInButtonHandler?()
     }
 
     private func isInputsFilled() -> Bool {
@@ -221,12 +193,10 @@ extension LoginView {
         inputPasswordField.text = nil
         inputLoginField.text = nil
         loginButton.isEnabled = false
-        signInButton.isEnabled = false
     }
 
     public func disableButtons() {
         loginButton.isEnabled = false
-        signInButton.isEnabled = false
     }
 
     public func getLogin() -> String {
@@ -247,10 +217,8 @@ extension LoginView: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         if isInputsFilled() {
             loginButton.isEnabled = true
-            signInButton.isEnabled = true
         } else {
             loginButton.isEnabled = false
-            signInButton.isEnabled = false
         }
     }
 }

@@ -13,14 +13,13 @@ final class LogInViewController: UIViewController {
     private let nc = NotificationCenter.default
     private var handle: FirebaseAuthorization.listener?
 
-    static var loginDelegate: LoginViewControllerDelegate?
+    private lazy var loginDelegate: LoginViewControllerDelegate = LoginInspector()
 
     private lazy var loginView: LoginView = {
         let view = LoginView()
 
         view.translatesAutoresizingMaskIntoConstraints = false
         view.onTapButtonHandler = didTapLoginButton
-        view.onTapSignInButtonHandler = didTapSignInButton
 
         return view
     }()
@@ -47,9 +46,7 @@ final class LogInViewController: UIViewController {
         nc.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         nc.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 
-        handle = auth.auth().addStateDidChangeListener { auth, user in
-            // ...
-        }
+        handle = auth.auth().addStateDidChangeListener { auth, user in }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -88,52 +85,44 @@ final class LogInViewController: UIViewController {
 
     @objc
     private func didTapLoginButton() {
-#if DEBUG
-        let userService = TestUserService()
-#else
-        let userService = CurrentUserService()
-#endif
-
-        guard let loginDelegate = LogInViewController.loginDelegate else { return }
-
         loginDelegate.checkCredentials(email: loginView.getLogin(),
                                        password: loginView.getPassword())
         { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(_):
-                let profileModel = ProfileViewModel(user: userService.getUser())
-                self.navigationController?.pushViewController(ProfileViewController(viewModel: profileModel), animated: true)
+                self.openProfileVC()
             case .failure(let error):
-                print(error)
-                self.showAlert(alertTitle: .signUpError, errorCode: error.code)
+                if error.code == .noSuchUserErrorCode {
+                    self.createNewUser()
+                } else {
+                    print(error)
+                    self.showAlert(alertTitle: .signUpError, errorCode: error.code)
+                }
             }
         }
     }
 
-    @objc
-    private func didTapSignInButton() {
-#if DEBUG
-        let userService = TestUserService()
-#else
-        let userService = CurrentUserService()
-#endif
-
-        guard let loginDelegate = LogInViewController.loginDelegate else { return }
-
+    private func createNewUser() {
         loginDelegate.signUp(email: loginView.getLogin(),
                              password: loginView.getPassword())
         { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(_):
-                let profileModel = ProfileViewModel(user: userService.getUser())
-                self.navigationController?.pushViewController(ProfileViewController(viewModel: profileModel), animated: true)
+                self.openProfileVC()
             case .failure(let error):
                 print(error)
                 self.showAlert(alertTitle: .signInError, errorCode: error.code)
             }
         }
+    }
+
+    private func openProfileVC() {
+        let userService = CurrentUserService()
+
+        let profileModel = ProfileViewModel(user: userService.getUser())
+        self.navigationController?.pushViewController(ProfileViewController(viewModel: profileModel), animated: true)
     }
 
     private func showAlert( alertTitle: String, errorCode: Int) {

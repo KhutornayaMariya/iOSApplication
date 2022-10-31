@@ -35,4 +35,11 @@ final class CheckerService: CheckerServiceProtocol {
             completion(.success(result))
         }
     }
+
+    func isCurrentUser() -> Bool {
+        guard let _ = auth.auth().currentUser else {
+            return false
+        }
+        return true
+    }
 }

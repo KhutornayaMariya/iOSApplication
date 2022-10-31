@@ -20,4 +20,8 @@ class LoginInspector: LoginViewControllerDelegate {
     func signUp(email: String, password: String, completion: @escaping (Result<data, NSError>) -> Void) {
         checkerService.signUp(email: email, password: password, completion: completion)
     }
+
+    func isCurrentUser() -> Bool {
+        checkerService.isCurrentUser()
+    }
 }

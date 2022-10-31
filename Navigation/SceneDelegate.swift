@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseCore
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -17,14 +16,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: scene)
 
-        let loginInspector = MyLoginFactory().makeLoginInspector()
-        LogInViewController.loginDelegate = loginInspector
-
         self.window = window
         window.makeKeyAndVisible()
         let mainCoordinator = MainCoordinator()
         window.rootViewController = mainCoordinator.startApplication()
-        FirebaseApp.configure()
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -268,10 +268,10 @@
 		45CA0719290D5605009D0815 /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
+				45CA0726290E4DCA009D0815 /* FirebaseAuthorization.swift */,
 				45CA0720290D5F2E009D0815 /* CheckerService.swift */,
 				45CA0722290D5F51009D0815 /* CheckerServiceProtocol.swift */,
 				45E949D128E4571F00C48419 /* Login */,
-				45CA0726290E4DCA009D0815 /* FirebaseAuthorization.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
