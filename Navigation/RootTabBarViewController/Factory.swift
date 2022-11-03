@@ -16,6 +16,7 @@ final class Factory {
 
     let navigationController: UINavigationController = UINavigationController()
     let flow: Flow
+    private lazy var loginDelegate: LoginViewControllerDelegate = LoginInspector()
 
     init(
         flow: Flow
@@ -34,7 +35,9 @@ final class Factory {
             navigationController.setViewControllers([controller], animated: true)
         case .profile:
             let profileCoordinator = ProfileCoordinator()
-            let controller = LogInViewController()
+            let model = ProfileViewModel(user: CurrentUserService().getUser())
+            let controller = loginDelegate.isCurrentUser() ? ProfileViewController(viewModel: model) : LogInViewController()
+
             profileCoordinator.navController = navigationController
             navigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "house"), selectedImage: nil)
             navigationController.setViewControllers([controller], animated: true)

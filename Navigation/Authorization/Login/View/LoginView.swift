@@ -1,19 +1,15 @@
 //
-//  LogInViewController.swift
+//  LoginView.swift
 //  Navigation
 //
-//  Created by m.khutornaya on 17.07.2022.
+//  Created by m.khutornaya on 29.10.2022.
 //
 
 import UIKit
 
-final class LogInViewController: UIViewController {
+class LoginView: UIView {
 
-    private let nc = NotificationCenter.default
-
-    private var scrollViewConstraint: NSLayoutConstraint!
-
-    static var loginDelegate: LoginViewControllerDelegate?
+    public var scrollViewConstraint: NSLayoutConstraint!
 
     private let scrollView: UIScrollView = {
         let view = UIScrollView()
@@ -92,57 +88,36 @@ final class LogInViewController: UIViewController {
     }()
 
     private lazy var loginButton: CustomButton = {
-        let view = CustomButton(title: "Log In", titleColor: .white)
+        let view = CustomButton(title: "Войти", titleColor: .white)
 
         let image = UIImage(named: "blue_pixel")
         view.setBackgroundImage(image, for: .normal)
         view.layer.cornerRadius = 10
         view.layer.masksToBounds = true
+        view.isEnabled = false
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.tapAction = didTapLoginButton
 
         return view
     }()
 
-    private let alert: UIAlertController = {
-        let alert = UIAlertController(title: String.alertTitle, message: String.alertMessage, preferredStyle: .alert)
-        let action = UIAlertAction(title: String.alertAction, style: .default, handler: nil)
-        alert.addAction(action)
+    public var onTapButtonHandler: (() -> Void)? {
+        didSet {
+            loginButton.addTarget(self, action: #selector(tapWrapper), for: .touchUpInside)
+        }
+    }
 
-        return alert
-    }()
-
-    // MARK: Lifecycle
-
-    init() {
-        super.init(nibName: nil, bundle: nil)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setUp()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setUp()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
-
-        nc.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        nc.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        nc.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-    }
-
     private func setUp() {
-        view.backgroundColor = .white
-        view.addSubview(scrollView)
+        backgroundColor = .white
+        addSubview(scrollView)
         scrollView.addSubview(contentView)
 
         let subviews = [logo, backgroundView, loginButton]
@@ -150,13 +125,13 @@ final class LogInViewController: UIViewController {
 
         [inputLoginField, inputPasswordField, separator].forEach { backgroundView.addSubview($0) }
 
-        scrollViewConstraint = scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        scrollViewConstraint = scrollView.bottomAnchor.constraint(equalTo: bottomAnchor)
 
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.topAnchor.constraint(equalTo: topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollViewConstraint,
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
 
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
@@ -198,48 +173,53 @@ final class LogInViewController: UIViewController {
     }
 
     @objc
-    private func keyboardHide() {
-        scrollViewConstraint.constant = 0
-        view.setNeedsLayout()
+    private func tapWrapper() {
+        self.onTapButtonHandler?()
     }
 
-    @objc
-    private func keyboardShow(notification: Notification) {
-        guard let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
-        scrollViewConstraint.constant = -frame.size.height
-        view.setNeedsLayout()
-    }
-
-    @objc
-    private func didTapLoginButton() {
-#if DEBUG
-        let userService = TestUserService()
-#else
-        let userService = CurrentUserService()
-#endif
-
-        guard let loginDelegate = LogInViewController.loginDelegate,
-              loginDelegate.check(login: inputLoginField.text!, password: inputPasswordField.text!)
+    private func isInputsFilled() -> Bool {
+        guard let password = inputPasswordField.text,
+              let login = inputLoginField.text
         else {
-            present(alert, animated: true, completion: nil)
-            return
+            return false
         }
-        cleanInputs()
-
-        let model = ProfileViewModel(user: userService.getUser())
-        navigationController?.pushViewController(ProfileViewController(viewModel: model), animated: true)
-    }
-
-    private func cleanInputs () {
-        inputPasswordField.text = nil
-        inputLoginField.text = nil
+        return !password.isEmpty && !login.isEmpty
     }
 }
 
-extension LogInViewController: UITextFieldDelegate {
+extension LoginView {
+
+    public func cleanInputs() {
+        inputPasswordField.text = nil
+        inputLoginField.text = nil
+        loginButton.isEnabled = false
+    }
+
+    public func disableButtons() {
+        loginButton.isEnabled = false
+    }
+
+    public func getLogin() -> String {
+        return inputLoginField.text!
+    }
+
+    public func getPassword() -> String {
+        return inputPasswordField.text!
+    }
+}
+
+extension LoginView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        view.endEditing(true)
+        endEditing(true)
         return true
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        if isInputsFilled() {
+            loginButton.isEnabled = true
+        } else {
+            loginButton.isEnabled = false
+        }
     }
 }
 
@@ -247,10 +227,4 @@ private extension CGFloat {
     static let size: CGFloat = 100
     static let safeArea: CGFloat = 16
     static let vertical: CGFloat = 120
-}
-
-private extension String {
-    static let alertTitle = "Ошибка авторизации"
-    static let alertMessage = "Введенные вами логин или пароль неверные"
-    static let alertAction = "Повторить"
 }
