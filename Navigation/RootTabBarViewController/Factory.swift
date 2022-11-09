@@ -36,7 +36,8 @@ final class Factory {
         case .profile:
             let profileCoordinator = ProfileCoordinator()
             let model = ProfileViewModel(user: CurrentUserService().getUser())
-            let controller = loginDelegate.isCurrentUser() ? ProfileViewController(viewModel: model) : LogInViewController()
+            let isAuthorized = AuthorizationModel.defaultModel.credential == nil ? false : true
+            let controller = isAuthorized ? ProfileViewController(viewModel: model) : LogInViewController()
 
             profileCoordinator.navController = navigationController
             navigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "house"), selectedImage: nil)
