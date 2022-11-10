@@ -19,6 +19,8 @@
 		4542CDE3291BB898000C95DB /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 4542CDE2291BB898000C95DB /* Realm */; };
 		4542CDE5291BB898000C95DB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4542CDE4291BB898000C95DB /* RealmSwift */; };
 		4542CDE7291BE45C000C95DB /* RootTabBarViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542CDE6291BE45C000C95DB /* RootTabBarViewControllerProtocol.swift */; };
+		4542CDEA291BED7F000C95DB /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542CDE9291BED7F000C95DB /* FavoritesViewController.swift */; };
+		4542CDEC291BEF0C000C95DB /* FavoritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542CDEB291BEF0C000C95DB /* FavoritesCoordinator.swift */; };
 		454FDE2928EC6A5F000F8986 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454FDE2828EC6A5F000F8986 /* ProfileViewModel.swift */; };
 		457FAAE12896AB79007702B3 /* StorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = 457FAAE02896AB79007702B3 /* StorageService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		457FAAE42896AB79007702B3 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 457FAADE2896AB79007702B3 /* StorageService.framework */; };
@@ -106,6 +108,8 @@
 		45229FC328847BB400EF150F /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		452852B32913C1B3008DD62C /* AuthorizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModel.swift; sourceTree = "<group>"; };
 		4542CDE6291BE45C000C95DB /* RootTabBarViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarViewControllerProtocol.swift; sourceTree = "<group>"; };
+		4542CDE9291BED7F000C95DB /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		4542CDEB291BEF0C000C95DB /* FavoritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCoordinator.swift; sourceTree = "<group>"; };
 		454FDE2828EC6A5F000F8986 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		457FAADE2896AB79007702B3 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		457FAAE02896AB79007702B3 /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
@@ -218,6 +222,15 @@
 			path = RealmManager;
 			sourceTree = "<group>";
 		};
+		4542CDE8291BED66000C95DB /* FavoritesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4542CDE9291BED7F000C95DB /* FavoritesViewController.swift */,
+				4542CDEB291BEF0C000C95DB /* FavoritesCoordinator.swift */,
+			);
+			path = FavoritesViewController;
+			sourceTree = "<group>";
+		};
 		454FDE2A28EC6AB7000F8986 /* PhotoGallery */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,6 +327,7 @@
 		45D31037272581B50034F6A2 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				4542CDE8291BED66000C95DB /* FavoritesViewController */,
 				452852B02913C14E008DD62C /* RealmManager */,
 				45CA0719290D5605009D0815 /* Authorization */,
 				454FDE2A28EC6AB7000F8986 /* PhotoGallery */,
@@ -562,6 +576,7 @@
 				45A72954288BE92200107918 /* ProfileRepository.swift in Sources */,
 				45CA0723290D5F51009D0815 /* CheckerServiceProtocol.swift in Sources */,
 				45229FB92884386700EF150F /* PostModel.swift in Sources */,
+				4542CDEA291BED7F000C95DB /* FavoritesViewController.swift in Sources */,
 				458198BC28EB2C1C00A5C852 /* RootTabBarViewController.swift in Sources */,
 				45D3105F2725B6120034F6A2 /* InfoView.swift in Sources */,
 				458198C528EB312F00A5C852 /* MainCoordinator.swift in Sources */,
@@ -572,6 +587,7 @@
 				45CA0727290E4DCA009D0815 /* FirebaseAuthorization.swift in Sources */,
 				45AD682B28E1F59500E44A20 /* UserServiceProtocol.swift in Sources */,
 				45229FC428847BB400EF150F /* PhotosCollectionViewCell.swift in Sources */,
+				4542CDEC291BEF0C000C95DB /* FavoritesCoordinator.swift in Sources */,
 				45D31039272581B50034F6A2 /* AppDelegate.swift in Sources */,
 				45229FAE2883D64400EF150F /* ProfileHeaderView.swift in Sources */,
 				45D3105127259BDC0034F6A2 /* FeedViewController.swift in Sources */,

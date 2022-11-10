@@ -9,6 +9,14 @@ import UIKit
 
 final class PostCell: UITableViewCell {
 
+    public var onTapHander: (() -> Void)? {
+        didSet {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(tapWrapper))
+            tap.numberOfTapsRequired = 2
+            addGestureRecognizer(tap)
+        }
+    }
+
     private let title: UILabel = {
         let view = UILabel()
 
@@ -107,6 +115,13 @@ final class PostCell: UITableViewCell {
             views.topAnchor.constraint(equalTo: desc.bottomAnchor, constant: .safeArea),
             views.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.safeArea),
         ])
+    }
+
+    @objc
+    private func tapWrapper() {
+        if onTapHander != nil {
+            onTapHander?()
+        }
     }
 }
 

@@ -13,7 +13,6 @@ final class ProfileViewController: UIViewController {
 
     private let nc = NotificationCenter.default
 
-
     private var tableViewConstraint: NSLayoutConstraint!
 
     init(viewModel: ProfileViewModel) {
@@ -78,6 +77,7 @@ final class ProfileViewController: UIViewController {
         #endif
 
         view.addSubview(tableView)
+        title = "Profile"
 
         tableViewConstraint = tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
 
@@ -88,6 +88,10 @@ final class ProfileViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableViewConstraint
         ])
+    }
+
+    private func savePostToFavorites(_ post: PostModel) {
+        print(post.description)
     }
 }
 
@@ -125,8 +129,10 @@ extension ProfileViewController: UITableViewDataSource {
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostCell.self), for: indexPath) as! PostCell
-            cell.configure(with: viewModel.dataItems[indexPath.row])
+            let item = viewModel.dataItems[indexPath.row]
+            cell.configure(with: item)
             cell.selectionStyle = .none
+            cell.onTapHander = { [weak self] in self?.savePostToFavorites(item) }
             return cell
         }
     }
