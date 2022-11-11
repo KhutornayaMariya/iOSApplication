@@ -8,10 +8,8 @@
 final class ProfileViewModel {
 
     let user: User
-    let dataItems: [PostModel]
 
     init(user: User) {
         self.user = user
-        self.dataItems = ProfileRepository().postItems
     }
 }

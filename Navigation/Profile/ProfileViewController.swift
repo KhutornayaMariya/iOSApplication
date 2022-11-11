@@ -10,6 +10,7 @@ import UIKit
 final class ProfileViewController: UIViewController {
 
     private let viewModel: ProfileViewModel
+    private lazy var dataItems: [Post] = CoreDataManager.defaultManager.posts
 
     private let nc = NotificationCenter.default
 
@@ -90,8 +91,20 @@ final class ProfileViewController: UIViewController {
         ])
     }
 
-    private func savePostToFavorites(_ post: PostModel) {
-        print(post.description)
+    private func savePostToFavorites(index: Int) {
+        if dataItems[index].isLiked {
+            let unlikedPost = dataItems[index]
+            unlikedPost.isLiked = false
+            unlikedPost.likes -= 1
+            CoreDataManager.defaultManager.posts[index] = unlikedPost
+            tableView.reloadData()
+        } else {
+            let likedPost = dataItems[index]
+            likedPost.isLiked = true
+            likedPost.likes += 1
+            CoreDataManager.defaultManager.posts[index] = likedPost
+            tableView.reloadData()
+        }
     }
 }
 
@@ -117,7 +130,7 @@ extension ProfileViewController: UITableViewDataSource {
         case .photoGallerySection:
             return 1
         default:
-            return viewModel.dataItems.count
+            return dataItems.count
         }
     }
 
@@ -129,10 +142,10 @@ extension ProfileViewController: UITableViewDataSource {
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostCell.self), for: indexPath) as! PostCell
-            let item = viewModel.dataItems[indexPath.row]
-            cell.configure(with: item)
+            let item = dataItems[indexPath.row]
+            cell.configure(with: PostModelFactory(item).postModel)
             cell.selectionStyle = .none
-            cell.onTapHander = { [weak self] in self?.savePostToFavorites(item) }
+            cell.onTapHander = { [weak self] in self?.savePostToFavorites(index: indexPath.row) }
             return cell
         }
     }

@@ -17,6 +17,7 @@ final class FavoritesViewController: UIViewController {
         view.separatorStyle = .none
         view.rowHeight = UITableView.automaticDimension
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
         view.register(PostCell.self, forCellReuseIdentifier: String(describing: PostCell.self))
 
         return view
@@ -25,6 +26,11 @@ final class FavoritesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
 
     private func setUp() {
@@ -45,14 +51,15 @@ final class FavoritesViewController: UIViewController {
 extension FavoritesViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return CoreDataManager.defaultManager.getLikedPosts().count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostCell.self), for: indexPath) as! PostCell
-        cell.configure(with: PostModel(author: "Pop", description: "ghghg", image: "1", likes: 3, views: 4))
-            cell.selectionStyle = .none
-            return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostCell.self), for: indexPath) as! PostCell
+        let post = CoreDataManager.defaultManager.getLikedPosts()[indexPath.row]
+        cell.configure(with: PostModelFactory(post).postModel)
+        cell.selectionStyle = .none
+        return cell
     }
 
     private func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

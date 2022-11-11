@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import StorageService
 
 class FeedViewController: UIViewController {
     
@@ -41,7 +40,7 @@ class FeedViewController: UIViewController {
     
     @objc
     func onButtonTap() {
-        parentNavigationController?.pushViewController(PostViewController(.orange, getPost()), animated: true)
+        parentNavigationController?.pushViewController(PostViewController(.orange), animated: true)
     }
 
     @objc
@@ -53,9 +52,5 @@ class FeedViewController: UIViewController {
         } else {
             mainView.setLabelColor(.red)
         }
-    }
-    
-    private func getPost() -> Post {
-        return Post(title: "New post!")
     }
 }

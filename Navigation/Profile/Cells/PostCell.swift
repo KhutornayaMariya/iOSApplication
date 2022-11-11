@@ -59,6 +59,16 @@ final class PostCell: UITableViewCell {
         return view
     }()
 
+    private let heart: UIImageView = {
+        let view = UIImageView()
+
+        view.contentMode = .scaleAspectFit
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.tintColor = .red
+
+        return view
+    }()
+
     private let views: UILabel = {
         let view = UILabel()
 
@@ -82,13 +92,14 @@ final class PostCell: UITableViewCell {
         title.text = data.author
         desc.text = data.description
         image.image = UIImage(named: data.image)
+        heart.image = data.isLiked ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
         likes.text = "Likes: " + String(data.likes)
         views.text = "Views: " + String(data.views)
     }
 
     private func setup() {
         backgroundColor = .white
-        let subviews = [title, image, desc, likes, views]
+        let subviews = [title, image, desc, likes, views, heart]
         subviews.forEach { addSubview($0) }
         let screenWidth = UIScreen.main.bounds.size.width
 
@@ -107,7 +118,11 @@ final class PostCell: UITableViewCell {
             desc.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .safeArea),
             desc.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.safeArea),
 
-            likes.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .safeArea),
+            heart.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .safeArea),
+            heart.topAnchor.constraint(equalTo: desc.bottomAnchor, constant: .safeArea),
+            heart.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.safeArea),
+
+            likes.leadingAnchor.constraint(equalTo: heart.trailingAnchor, constant: .safeArea),
             likes.topAnchor.constraint(equalTo: desc.bottomAnchor, constant: .safeArea),
             likes.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.safeArea),
 

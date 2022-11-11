@@ -6,15 +6,12 @@
 //
 
 import UIKit
-import StorageService
 
 class PostViewController: UIViewController {
     
-    var post: Post
     var backgroundColor: UIColor = .white
     
-    init(_ color: UIColor, _ post: Post) {
-        self.post = post
+    init(_ color: UIColor) {
         super.init(nibName: nil, bundle: nil)
         backgroundColor = color
         let infoButtonItem = UIBarButtonItem(
@@ -33,7 +30,7 @@ class PostViewController: UIViewController {
     override func loadView() {
         view = UIView()
         view.backgroundColor = backgroundColor
-        self.title = post.title
+        self.title = "New Post!"
     }
     
     override func viewDidLoad() {
