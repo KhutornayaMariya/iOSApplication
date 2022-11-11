@@ -20,7 +20,14 @@ class RootTabBarViewController: UITabBarController {
     }
 
     private func setControllers() {
-        viewControllers = [
+        viewControllers = reloadViewControllers()
+    }
+}
+
+extension RootTabBarViewController: RootTabBarViewControllerProtocol {
+
+    func reloadViewControllers() -> [UIViewController] {
+        return [
             feedViewController.navigationController,
             profileViewController.navigationController
         ]

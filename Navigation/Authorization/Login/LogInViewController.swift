@@ -9,9 +9,9 @@ import UIKit
 
 final class LogInViewController: UIViewController {
 
-    private typealias auth = FirebaseAuthorization.auth
+    private typealias firebaseAuth = FirebaseAuthorization.auth
     private let nc = NotificationCenter.default
-    private var handle: FirebaseAuthorization.listener?
+    private var firebaseAuthHandle: FirebaseAuthorization.listener?
 
     private lazy var loginDelegate: LoginViewControllerDelegate = LoginInspector()
 
@@ -19,7 +19,7 @@ final class LogInViewController: UIViewController {
         let view = LoginView()
 
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.onTapButtonHandler = didTapLoginButton
+        view.onTapButtonHandler = saveCredsToRealm
 
         return view
     }()
@@ -46,13 +46,13 @@ final class LogInViewController: UIViewController {
         nc.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         nc.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 
-        handle = auth.auth().addStateDidChangeListener { auth, user in }
+        firebaseAuthHandle = firebaseAuth.auth().addStateDidChangeListener { auth, user in }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         nc.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        auth.auth().removeStateDidChangeListener(handle!)
+        firebaseAuth.auth().removeStateDidChangeListener(firebaseAuthHandle!)
         
         loginView.cleanInputs()
         loginView.disableButtons()
@@ -81,6 +81,13 @@ final class LogInViewController: UIViewController {
         guard let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
         loginView.scrollViewConstraint.constant = -frame.size.height
         view.setNeedsLayout()
+    }
+
+    @objc
+    private func saveCredsToRealm() {
+        AuthorizationModel.defaultModel.addCredential(login: loginView.getLogin(), password: loginView.getPassword())
+        openProfileVC()
+        navigationController?.tabBarController?.viewControllers = RootTabBarViewController().reloadViewControllers()
     }
 
     @objc
