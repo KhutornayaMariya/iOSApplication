@@ -91,20 +91,21 @@ final class ProfileViewController: UIViewController {
         ])
     }
 
-    private func savePostToFavorites(index: Int) {
+    private func didPostTap(index: Int) {
         if dataItems[index].isLiked {
-            let unlikedPost = dataItems[index]
-            unlikedPost.isLiked = false
-            unlikedPost.likes -= 1
-            CoreDataManager.defaultManager.posts[index] = unlikedPost
-            tableView.reloadData()
+            updateLikes(index: index, isLiked: false)
         } else {
-            let likedPost = dataItems[index]
-            likedPost.isLiked = true
-            likedPost.likes += 1
-            CoreDataManager.defaultManager.posts[index] = likedPost
-            tableView.reloadData()
+            updateLikes(index: index, isLiked: true)
         }
+        tableView.reloadData()
+    }
+
+    private func updateLikes(index: Int, isLiked: Bool) {
+        let post = dataItems[index]
+        post.isLiked = isLiked
+        let increment = isLiked ? 1 : -1
+        post.likes += Int32(increment)
+        CoreDataManager.defaultManager.posts[index] = post
     }
 }
 
@@ -145,7 +146,7 @@ extension ProfileViewController: UITableViewDataSource {
             let item = dataItems[indexPath.row]
             cell.configure(with: PostModelFactory(item).postModel)
             cell.selectionStyle = .none
-            cell.onTapHander = { [weak self] in self?.savePostToFavorites(index: indexPath.row) }
+            cell.onTapHander = { [weak self] in self?.didPostTap(index: indexPath.row) }
             return cell
         }
     }
