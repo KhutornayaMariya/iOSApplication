@@ -7,9 +7,9 @@
 
 final class ProfileViewModel {
 
-    let user: User
+    let user: UserModel
 
-    init(user: User) {
+    init(user: UserModel) {
         self.user = user
     }
 }

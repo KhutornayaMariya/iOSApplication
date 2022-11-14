@@ -139,7 +139,7 @@ extension ProfileViewController: UITableViewDataSource {
         switch indexPath.section {
         case .photoGallerySection:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PhotosTableViewCell.self), for: indexPath) as! PhotosTableViewCell
-            cell.selectionStyle = .gray
+            cell.selectionStyle = .none
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostCell.self), for: indexPath) as! PostCell

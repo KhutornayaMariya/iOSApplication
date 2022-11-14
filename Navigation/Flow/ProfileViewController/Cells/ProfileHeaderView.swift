@@ -85,7 +85,7 @@ final class ProfileHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public func configure(with user: User) {
+    public func configure(with user: UserModel) {
         userName.text = user.name
         userImage.image = user.avatar
         statusLabel.text = user.status
