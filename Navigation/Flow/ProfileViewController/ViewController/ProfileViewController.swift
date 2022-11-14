@@ -92,20 +92,9 @@ final class ProfileViewController: UIViewController {
     }
 
     private func didPostTap(index: Int) {
-        if dataItems[index].isLiked {
-            updateLikes(index: index, isLiked: false)
-        } else {
-            updateLikes(index: index, isLiked: true)
-        }
-        tableView.reloadData()
-    }
-
-    private func updateLikes(index: Int, isLiked: Bool) {
         let post = dataItems[index]
-        post.isLiked = isLiked
-        let increment = isLiked ? 1 : -1
-        post.likes += Int32(increment)
-        CoreDataManager.defaultManager.posts[index] = post
+        post.updateLikes()
+        tableView.reloadData()
     }
 }
 
