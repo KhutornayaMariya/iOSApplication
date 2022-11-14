@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class User {
+final class UserModel {
     let name: String
     let avatar: UIImage?
     let status: String

@@ -1,5 +1,5 @@
 //
-//  PhotosViewController.swift
+//  PhotoGalleryViewController.swift
 //  Navigation
 //
 //  Created by m.khutornaya on 17.07.2022.
@@ -8,7 +8,7 @@
 import UIKit
 import iOSIntPackage
 
-final class PhotosViewController: UIViewController {
+final class PhotoGalleryViewController: UIViewController {
 
     var dataItems: [UIImage] = ProfileRepository().photoItems
 
@@ -89,7 +89,7 @@ final class PhotosViewController: UIViewController {
     }
 }
 
-extension PhotosViewController: UICollectionViewDataSource {
+extension PhotoGalleryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         dataItems.count
     }

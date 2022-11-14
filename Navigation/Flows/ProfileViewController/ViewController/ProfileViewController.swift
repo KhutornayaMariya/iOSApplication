@@ -113,7 +113,7 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case .photoGallerySection:
-            navigationController?.pushViewController(PhotosViewController(), animated: true)
+            navigationController?.pushViewController(PhotoGalleryViewController(), animated: true)
         default:
             break
         }

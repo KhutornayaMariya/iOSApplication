@@ -6,5 +6,5 @@
 //
 
 protocol UserServiceProtocol {
-    func getUser() -> User
+    func getUser() -> UserModel
 }

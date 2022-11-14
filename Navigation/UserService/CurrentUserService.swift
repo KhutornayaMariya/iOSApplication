@@ -8,11 +8,11 @@
 import UIKit
 
 final class CurrentUserService {
-    private let user: User = User(name: "Hipster Cat", avatar: UIImage(named: "ice"), status: "Myow")
+    private let user: UserModel = UserModel(name: "Hipster Cat", avatar: UIImage(named: "ice"), status: "Myow")
 }
 
 extension CurrentUserService: UserServiceProtocol {
-    func getUser() -> User {
+    func getUser() -> UserModel {
         return user
     }
 }

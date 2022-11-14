@@ -8,11 +8,11 @@
 import UIKit
 
 final class TestUserService {
-    private let testUser: User = User(name: "Tester", avatar: UIImage(named: "ice"), status: "Test")
+    private let testUser: UserModel = UserModel(name: "Tester", avatar: UIImage(named: "ice"), status: "Test")
 }
 
 extension TestUserService: UserServiceProtocol {
-    func getUser() -> User {
+    func getUser() -> UserModel {
         return testUser
     }
 }
