@@ -23,7 +23,6 @@
 		4542CDEC291BEF0C000C95DB /* FavoritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542CDEB291BEF0C000C95DB /* FavoritesCoordinator.swift */; };
 		4542CDF0291D50DC000C95DB /* Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4542CDEE291D50DC000C95DB /* Data.xcdatamodeld */; };
 		4542CDF2291D5128000C95DB /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542CDF1291D5128000C95DB /* CoreDataManager.swift */; };
-		4542CDF4291E65F6000C95DB /* CoreDataManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542CDF3291E65F6000C95DB /* CoreDataManagerProtocol.swift */; };
 		4542CDF6291E7C8D000C95DB /* PostModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542CDF5291E7C8D000C95DB /* PostModelFactory.swift */; };
 		4548F323292299BE00AEEF59 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F322292299BE00AEEF59 /* Post.swift */; };
 		454FDE2928EC6A5F000F8986 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454FDE2828EC6A5F000F8986 /* ProfileViewModel.swift */; };
@@ -112,7 +111,6 @@
 		4542CDEB291BEF0C000C95DB /* FavoritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCoordinator.swift; sourceTree = "<group>"; };
 		4542CDEF291D50DC000C95DB /* CoreDataManager.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataManager.xcdatamodel; sourceTree = "<group>"; };
 		4542CDF1291D5128000C95DB /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		4542CDF3291E65F6000C95DB /* CoreDataManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerProtocol.swift; sourceTree = "<group>"; };
 		4542CDF5291E7C8D000C95DB /* PostModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModelFactory.swift; sourceTree = "<group>"; };
 		4548F322292299BE00AEEF59 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		454FDE2828EC6A5F000F8986 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -236,7 +234,6 @@
 			isa = PBXGroup;
 			children = (
 				4542CDF1291D5128000C95DB /* CoreDataManager.swift */,
-				4542CDF3291E65F6000C95DB /* CoreDataManagerProtocol.swift */,
 				4542CDEE291D50DC000C95DB /* Data.xcdatamodeld */,
 				4548F322292299BE00AEEF59 /* Post.swift */,
 			);
@@ -712,7 +709,6 @@
 				45229FAE2883D64400EF150F /* ProfileHeaderView.swift in Sources */,
 				45D3105127259BDC0034F6A2 /* FeedViewController.swift in Sources */,
 				45DFB8E8290BEFC200702567 /* PlanetResidentsViewController.swift in Sources */,
-				4542CDF4291E65F6000C95DB /* CoreDataManagerProtocol.swift in Sources */,
 				458198B728EAC47700A5C852 /* CustomButton.swift in Sources */,
 				45E949D528E457FA00C48419 /* LoginInspector.swift in Sources */,
 				45229FB02883D66700EF150F /* ProfileViewController.swift in Sources */,

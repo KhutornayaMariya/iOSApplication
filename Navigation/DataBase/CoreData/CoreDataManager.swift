@@ -56,7 +56,7 @@ final class CoreDataManager {
             self.posts = try self.persistentContainer.viewContext.fetch(request)
         }
         catch {
-            print("Error")
+            print(error)
         }
     }
 
@@ -67,43 +67,61 @@ final class CoreDataManager {
     }
 }
 
-extension CoreDataManager: CoreDataManagerProtocol {
+extension CoreDataManager {
 
     func addPost(_ post: PostModel) {
-        let newPost = Post(context: persistentContainer.viewContext)
-        newPost.postDescription = post.description
-        newPost.author = post.author
-        newPost.image = post.image
-        newPost.likes = Int32(post.likes)
-        newPost.views = Int32(post.views)
-        newPost.isLiked = post.isLiked
-        posts.append(newPost)
-        saveContext()
-    }
+        persistentContainer.performBackgroundTask { context in
+            let newPost = Post(context: context)
+            newPost.postDescription = post.description
+            newPost.author = post.author
+            newPost.image = post.image
+            newPost.likes = Int32(post.likes)
+            newPost.views = Int32(post.views)
+            newPost.isLiked = post.isLiked
 
-    func deletePost(_ post: PostModel) {
-        let index = posts.firstIndex(where: { $0.postDescription == post.description })
-        guard let index = index else {
-            return
+            do {
+                try context.save()
+                print("Пост добавлен")
+            } catch {
+                print(error)
+            }
         }
-        persistentContainer.viewContext.delete(posts[index])
-        posts.remove(at: index)
+    }
+
+    func deletePost(_ post: Post) {
+        persistentContainer.viewContext.delete(post)
         saveContext()
     }
 
-    func getLikedPosts() -> [Post] {
-        posts.filter { $0.isLiked == true }
-    }
-
-    func searchPosts(with author: String) -> [Post] {
+    func getLikedPosts() -> NSFetchedResultsController<Post> {
         let request = Post.fetchRequest()
-        request.predicate = NSPredicate(format: "(author contains[c] %@) AND (isLiked == true)", author)
+        request.sortDescriptors = [NSSortDescriptor(key: "author", ascending: false)]
+        request.predicate = NSPredicate(format: "isLiked == true")
+        let frc = NSFetchedResultsController(fetchRequest: request,
+                                             managedObjectContext: persistentContainer.viewContext,
+                                             sectionNameKeyPath: nil, cacheName: nil)
         do {
-            let searchedPosts = try self.persistentContainer.viewContext.fetch(request)
-            return searchedPosts
+            try frc.performFetch()
         }
         catch {
-            return []
+           print(error)
         }
+        return frc
+    }
+
+    func searchPosts(with author: String) -> NSFetchedResultsController<Post> {
+        let request = Post.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "author", ascending: false)]
+        request.predicate = NSPredicate(format: "(author contains[c] %@) AND (isLiked == true)", author)
+        let frc = NSFetchedResultsController(fetchRequest: request,
+                                             managedObjectContext: persistentContainer.viewContext,
+                                             sectionNameKeyPath: nil, cacheName: nil)
+        do {
+            try frc.performFetch()
+        }
+        catch {
+           print(error)
+        }
+        return frc
     }
 }
