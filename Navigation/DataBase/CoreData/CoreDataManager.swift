@@ -21,6 +21,12 @@ final class CoreDataManager {
         }
     }
 
+    private lazy var backgroundContext: NSManagedObjectContext = {
+        let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        context.persistentStoreCoordinator = persistentContainer.persistentStoreCoordinator
+        return context
+    }()
+
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Data")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -34,10 +40,9 @@ final class CoreDataManager {
     // MARK: - Core Data Saving support
 
     private func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
+        if backgroundContext.hasChanges {
             do {
-                try context.save()
+                try backgroundContext.save()
             } catch {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
