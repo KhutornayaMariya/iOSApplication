@@ -94,4 +94,16 @@ extension CoreDataManager: CoreDataManagerProtocol {
     func getLikedPosts() -> [Post] {
         posts.filter { $0.isLiked == true }
     }
+
+    func searchPosts(with author: String) -> [Post] {
+        let request = Post.fetchRequest()
+        request.predicate = NSPredicate(format: "(author contains[c] %@) AND (isLiked == true)", author)
+        do {
+            let searchedPosts = try self.persistentContainer.viewContext.fetch(request)
+            return searchedPosts
+        }
+        catch {
+            return []
+        }
+    }
 }
