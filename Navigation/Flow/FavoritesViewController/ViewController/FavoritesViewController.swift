@@ -14,6 +14,7 @@ final class FavoritesViewController: UIViewController {
         let view = UITableView(frame: .zero, style: .grouped)
 
         view.dataSource = self
+        view.delegate = self
         view.separatorStyle = .none
         view.rowHeight = UITableView.automaticDimension
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -30,6 +31,7 @@ final class FavoritesViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.setContentOffset(.zero, animated: true)
         tableView.reloadData()
     }
 
@@ -61,10 +63,16 @@ extension FavoritesViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         return cell
     }
+}
 
-    private func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UILabel()
-        headerView.text = "Favorites"
-        return headerView
+extension FavoritesViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .destructive, title: "Удалить") { [weak self] (_, _, _) in
+            guard let self = self else { return }
+            CoreDataManager.defaultManager.getLikedPosts()[indexPath.row].updateLikes()
+
+            self.tableView.reloadData()
+        }
+        return .init(actions: [action])
     }
 }
