@@ -25,6 +25,7 @@
 		4542CDF2291D5128000C95DB /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542CDF1291D5128000C95DB /* CoreDataManager.swift */; };
 		4542CDF4291E65F6000C95DB /* CoreDataManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542CDF3291E65F6000C95DB /* CoreDataManagerProtocol.swift */; };
 		4542CDF6291E7C8D000C95DB /* PostModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542CDF5291E7C8D000C95DB /* PostModelFactory.swift */; };
+		4548F323292299BE00AEEF59 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F322292299BE00AEEF59 /* Post.swift */; };
 		454FDE2928EC6A5F000F8986 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454FDE2828EC6A5F000F8986 /* ProfileViewModel.swift */; };
 		457FAAE42896AB79007702B3 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 457FAADE2896AB79007702B3 /* StorageService.framework */; };
 		457FAAE52896AB79007702B3 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 457FAADE2896AB79007702B3 /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -113,6 +114,7 @@
 		4542CDF1291D5128000C95DB /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		4542CDF3291E65F6000C95DB /* CoreDataManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerProtocol.swift; sourceTree = "<group>"; };
 		4542CDF5291E7C8D000C95DB /* PostModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModelFactory.swift; sourceTree = "<group>"; };
+		4548F322292299BE00AEEF59 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		454FDE2828EC6A5F000F8986 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		457FAADE2896AB79007702B3 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		458198B628EAC47700A5C852 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				4542CDF1291D5128000C95DB /* CoreDataManager.swift */,
 				4542CDF3291E65F6000C95DB /* CoreDataManagerProtocol.swift */,
 				4542CDEE291D50DC000C95DB /* Data.xcdatamodeld */,
+				4548F322292299BE00AEEF59 /* Post.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -683,6 +686,7 @@
 				45D310572725A7CB0034F6A2 /* FeedView.swift in Sources */,
 				45229FC028846AAF00EF150F /* PhotosTableViewCell.swift in Sources */,
 				458198C228EB2EA800A5C852 /* FeedCoordinator.swift in Sources */,
+				4548F323292299BE00AEEF59 /* Post.swift in Sources */,
 				458198B928EAE5BA00A5C852 /* FeedModel.swift in Sources */,
 				458198C028EB2E8B00A5C852 /* ProfileCoordinator.swift in Sources */,
 				45DFB8E5290BEAA000702567 /* PlanetModel.swift in Sources */,

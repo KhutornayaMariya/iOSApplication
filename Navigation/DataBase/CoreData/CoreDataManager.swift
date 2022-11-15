@@ -16,15 +16,18 @@ final class CoreDataManager {
 
     init() {
         reloadPosts()
+        if posts.isEmpty {
+            fillCoreDataWithPosts()
+        }
     }
 
+    private lazy var backgroundContext: NSManagedObjectContext = {
+        let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        context.persistentStoreCoordinator = persistentContainer.persistentStoreCoordinator
+        return context
+    }()
+
     private lazy var persistentContainer: NSPersistentContainer = {
-        /*
-         The persistent container for the application. This implementation
-         creates and returns a container, having loaded the store for the
-         application to it. This property is optional since there are legitimate
-         error conditions that could cause the creation of the store to fail.
-         */
         let container = NSPersistentContainer(name: "Data")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -37,10 +40,9 @@ final class CoreDataManager {
     // MARK: - Core Data Saving support
 
     private func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
+        if backgroundContext.hasChanges {
             do {
-                try context.save()
+                try backgroundContext.save()
             } catch {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
@@ -57,6 +59,12 @@ final class CoreDataManager {
             print("Error")
         }
     }
+
+    private func fillCoreDataWithPosts() {
+        for post in ProfileRepository().postItems {
+            addPost(post)
+        }
+    }
 }
 
 extension CoreDataManager: CoreDataManagerProtocol {
@@ -69,21 +77,33 @@ extension CoreDataManager: CoreDataManagerProtocol {
         newPost.likes = Int32(post.likes)
         newPost.views = Int32(post.views)
         newPost.isLiked = post.isLiked
+        posts.append(newPost)
         saveContext()
-        reloadPosts()
     }
 
     func deletePost(_ post: PostModel) {
-        let postToDelete = posts.first(where: { $0.postDescription == post.description })
-        guard let postToDelete = postToDelete else {
+        let index = posts.firstIndex(where: { $0.postDescription == post.description })
+        guard let index = index else {
             return
         }
-        persistentContainer.viewContext.delete(postToDelete)
+        persistentContainer.viewContext.delete(posts[index])
+        posts.remove(at: index)
         saveContext()
-        reloadPosts()
     }
 
     func getLikedPosts() -> [Post] {
         posts.filter { $0.isLiked == true }
+    }
+
+    func searchPosts(with author: String) -> [Post] {
+        let request = Post.fetchRequest()
+        request.predicate = NSPredicate(format: "(author contains[c] %@) AND (isLiked == true)", author)
+        do {
+            let searchedPosts = try self.persistentContainer.viewContext.fetch(request)
+            return searchedPosts
+        }
+        catch {
+            return []
+        }
     }
 }
