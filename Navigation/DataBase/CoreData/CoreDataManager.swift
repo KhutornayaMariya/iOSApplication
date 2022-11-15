@@ -57,7 +57,7 @@ final class CoreDataManager {
 
     private func fillCoreDataWithPosts() {
         for post in ProfileRepository().postItems {
-            CoreDataManager.defaultManager.addPost(post)
+            addPost(post)
         }
     }
 }
@@ -72,18 +72,18 @@ extension CoreDataManager: CoreDataManagerProtocol {
         newPost.likes = Int32(post.likes)
         newPost.views = Int32(post.views)
         newPost.isLiked = post.isLiked
+        posts.append(newPost)
         saveContext()
-        reloadPosts()
     }
 
     func deletePost(_ post: PostModel) {
-        let postToDelete = posts.first(where: { $0.postDescription == post.description })
-        guard let postToDelete = postToDelete else {
+        let index = posts.firstIndex(where: { $0.postDescription == post.description })
+        guard let index = index else {
             return
         }
-        persistentContainer.viewContext.delete(postToDelete)
+        persistentContainer.viewContext.delete(posts[index])
+        posts.remove(at: index)
         saveContext()
-        reloadPosts()
     }
 
     func getLikedPosts() -> [Post] {
