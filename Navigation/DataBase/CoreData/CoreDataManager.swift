@@ -34,6 +34,8 @@ final class CoreDataManager {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+
+        container.viewContext.automaticallyMergesChangesFromParent = true
         return container
     }()
 
