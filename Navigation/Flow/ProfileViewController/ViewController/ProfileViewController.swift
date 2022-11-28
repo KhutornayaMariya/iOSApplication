@@ -10,7 +10,9 @@ import UIKit
 final class ProfileViewController: UIViewController {
 
     private let viewModel: ProfileViewModel
-    private lazy var dataItems: [Post] = CoreDataManager.defaultManager.posts
+    private var dataItems: [Post] {
+        CoreDataManager.defaultManager.posts
+    }
 
     private let nc = NotificationCenter.default
 
@@ -155,5 +157,4 @@ extension ProfileViewController: UITableViewDataSource {
 
 private extension Int {
     static let photoGallerySection: Int = 0
-    static let headerViewSection: Int = 0
 }
