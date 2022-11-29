@@ -12,7 +12,9 @@ import CoreLocation
 class PostViewController: UIViewController {
 
     private var locationManager: CLLocationManager!
+    private var mapAnnotation: MKPointAnnotation!
     private var routePolyline: MKOverlay!
+    private var destinationCoordinate: CLLocationCoordinate2D!
 
     private lazy var mapView: MKMapView = {
         let view = MKMapView()
@@ -21,9 +23,11 @@ class PostViewController: UIViewController {
         view.delegate = self
         if #available(iOS 16.0, *) {
             view.preferredConfiguration = MKHybridMapConfiguration(elevationStyle: .flat)
-        } else {
-            // Fallback on earlier versions
         }
+
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(handleTap))
+        gestureRecognizer.delegate = self
+        view.addGestureRecognizer(gestureRecognizer)
 
         return view
     }()
@@ -32,7 +36,6 @@ class PostViewController: UIViewController {
         super.viewDidLoad()
         setUp()
         setUpLocationManager()
-        setUpPins()
     }
 
     private func setUp() {
@@ -66,29 +69,9 @@ class PostViewController: UIViewController {
         self.locationManager = locationManager
     }
 
-    private func setUpPins() {
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = CLLocationCoordinate2D(latitude: 55.73, longitude: 37.61)
-        annotation.title = "My pin"
-        mapView.addAnnotation(annotation)
-    }
-
-    private func addDirections(coordinate: CLLocationCoordinate2D) {
-        if let routePolyline = routePolyline {
-            self.mapView.removeOverlay(routePolyline)
-        }
-
-        let request = MKDirections.Request()
-        request.transportType = .automobile
-
-        let sourcePlacemark = MKPlacemark(coordinate: coordinate)
-        request.source = MKMapItem(placemark: sourcePlacemark)
-        print(mapView.userLocation.coordinate)
-
-        let destinationPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 59.9, longitude: 30.3))
-        request.destination = MKMapItem(placemark: destinationPlacemark)
-
-        let direction = MKDirections(request: request)
+    private func showDirection() {
+        guard let _ = destinationCoordinate else { return }
+        let direction = direction()
 
         direction.calculate { [weak self] response, error in
             guard let self = self else { return }
@@ -101,6 +84,9 @@ class PostViewController: UIViewController {
             }
 
             guard let route = response.routes.first else { return }
+            if let routePolyline = self.routePolyline {
+                self.mapView.removeOverlay(routePolyline)
+            }
 
             self.routePolyline = route.polyline
             self.mapView.addOverlay(self.routePolyline, level: .aboveRoads)
@@ -108,6 +94,20 @@ class PostViewController: UIViewController {
             let rect = route.polyline.boundingMapRect
             self.mapView.setRegion(MKCoordinateRegion(rect), animated: true)
         }
+    }
+
+    private func direction() -> MKDirections {
+        let request = MKDirections.Request()
+        request.transportType = .automobile
+
+        let sourcePlacemark = MKPlacemark(coordinate: mapView.userLocation.coordinate)
+        request.source = MKMapItem(placemark: sourcePlacemark)
+        print(mapView.userLocation.coordinate)
+
+        let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinate)
+        request.destination = MKMapItem(placemark: destinationPlacemark)
+
+        return MKDirections(request: request)
     }
     
     @objc
@@ -149,7 +149,9 @@ extension PostViewController: CLLocationManagerDelegate {
 
         let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
         mapView.setRegion(region, animated: true)
-        addDirections(coordinate: location.coordinate)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.showDirection()
+        }
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -163,5 +165,22 @@ extension PostViewController: MKMapViewDelegate {
         render.strokeColor = .systemBlue
         render.lineWidth = 4.0
         return render
+    }
+}
+
+extension PostViewController: UIGestureRecognizerDelegate {
+    @objc func handleTap(gestureRecognizer: UITapGestureRecognizer) {
+
+        let location = gestureRecognizer.location(in: mapView)
+        destinationCoordinate = mapView.convert(location, toCoordinateFrom: mapView)
+
+        if let mapAnnotation = mapAnnotation {
+            mapView.removeAnnotation(mapAnnotation)
+        }
+
+        mapAnnotation = MKPointAnnotation()
+        mapAnnotation.coordinate = destinationCoordinate
+        mapView.addAnnotation(mapAnnotation)
+        showDirection()
     }
 }
