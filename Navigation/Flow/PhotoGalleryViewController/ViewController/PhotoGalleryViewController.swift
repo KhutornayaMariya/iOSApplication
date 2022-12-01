@@ -15,7 +15,7 @@ final class PhotoGalleryViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
 
-        view.backgroundColor = .white
+        view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         view.dataSource = self
         view.showsVerticalScrollIndicator = false
@@ -56,7 +56,7 @@ final class PhotoGalleryViewController: UIViewController {
     // MARK: - Private methods
 
     private func setup() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         view.addSubview(collectionView)
 
         NSLayoutConstraint.activate([

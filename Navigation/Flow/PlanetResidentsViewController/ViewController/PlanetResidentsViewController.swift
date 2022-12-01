@@ -50,7 +50,7 @@ final class PlanetResidentsViewController: UIViewController {
     }
     
     private func setUp() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
 
         view.addSubview(self.tableView)
 

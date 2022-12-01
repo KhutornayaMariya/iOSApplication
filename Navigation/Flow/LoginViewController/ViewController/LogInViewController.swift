@@ -59,7 +59,7 @@ final class LogInViewController: UIViewController {
     }
 
     private func setUp() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         view.addSubview(loginView)
 
         NSLayoutConstraint.activate([

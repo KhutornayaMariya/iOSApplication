@@ -13,7 +13,7 @@ class InfoView: UIView {
         let view = UILabel()
 
         view.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        view.textColor = .black
+        view.textColor = .label
         view.translatesAutoresizingMaskIntoConstraints = false
 
         return view
@@ -23,22 +23,22 @@ class InfoView: UIView {
         let view = UILabel()
 
         view.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        view.textColor = .black
+        view.textColor = .label
         view.translatesAutoresizingMaskIntoConstraints = false
 
         return view
     }()
 
     private lazy var residentsButton: CustomButton = {
-        let button = CustomButton(title: "RESIDENTS_BUTTON".localized, titleColor: .blue)
-        button.backgroundColor = .white
+        let button = CustomButton(title: "RESIDENTS_BUTTON".localized, titleColor: .label)
+        button.backgroundColor = .systemBlue
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     private lazy var button: CustomButton = {
-        let button = CustomButton(title: "TAP_BUTTON".localized, titleColor: .blue)
-        button.backgroundColor = .white
+        let button = CustomButton(title: "TAP_BUTTON".localized, titleColor: .label)
+        button.backgroundColor = .systemBlue
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()

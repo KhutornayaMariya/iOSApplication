@@ -74,11 +74,7 @@ final class ProfileViewController: UIViewController {
     }
 
     private func setUp() {
-        #if DEBUG
-        view.backgroundColor = .lightGray
-        #else
-        view.backgroundColor = .white
-        #endif
+        view.backgroundColor = .systemBackground
 
         view.addSubview(tableView)
         title = "Profile"

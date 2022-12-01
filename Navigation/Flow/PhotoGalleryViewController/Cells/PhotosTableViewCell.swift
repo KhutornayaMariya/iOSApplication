@@ -12,7 +12,7 @@ final class PhotosTableViewCell: UITableViewCell {
     private let title: UILabel = {
         let view = UILabel()
 
-        view.textColor = .black
+        view.textColor = .label
         view.font = .systemFont(ofSize: 24, weight: .bold)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.text = "PHOTO".localized
@@ -25,7 +25,7 @@ final class PhotosTableViewCell: UITableViewCell {
 
         view.translatesAutoresizingMaskIntoConstraints = false
         view.image = UIImage(systemName: "arrow.right", withConfiguration: .none)?.withRenderingMode(.alwaysTemplate)
-        view.tintColor = .black
+        view.tintColor = UIColor.createColor(lightMode: .black, darkMode: .white)
 
         return view
     }()

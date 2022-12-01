@@ -29,6 +29,7 @@
 		4572E3DD2938D439001AA01D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4572E3DF2938D439001AA01D /* Localizable.strings */; };
 		4572E3E12938D443001AA01D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4572E3E32938D443001AA01D /* InfoPlist.strings */; };
 		4572E3E72938D866001AA01D /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4572E3E62938D866001AA01D /* String+Extensions.swift */; };
+		4572E3EF2938E891001AA01D /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4572E3EE2938E891001AA01D /* UIColor+Extensions.swift */; };
 		457FAAE42896AB79007702B3 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 457FAADE2896AB79007702B3 /* StorageService.framework */; };
 		457FAAE52896AB79007702B3 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 457FAADE2896AB79007702B3 /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		458198B728EAC47700A5C852 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458198B628EAC47700A5C852 /* CustomButton.swift */; };
@@ -124,6 +125,7 @@
 		4572E3E92938DE06001AA01D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4572E3EC2938E511001AA01D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4572E3ED2938E514001AA01D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		4572E3EE2938E891001AA01D /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		457FAADE2896AB79007702B3 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		458198B628EAC47700A5C852 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		458198B828EAE5BA00A5C852 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				4572E3E62938D866001AA01D /* String+Extensions.swift */,
+				4572E3EE2938E891001AA01D /* UIColor+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -747,6 +750,7 @@
 				45AD682928E1F51600E44A20 /* UserModel.swift in Sources */,
 				45DFB8EA290C137C00702567 /* ResidentModel.swift in Sources */,
 				45CA0717290D3C27009D0815 /* LoginView.swift in Sources */,
+				4572E3EF2938E891001AA01D /* UIColor+Extensions.swift in Sources */,
 				45DFB8E3290BDC8C00702567 /* NetworkError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
