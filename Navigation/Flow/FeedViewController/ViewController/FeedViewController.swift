@@ -40,7 +40,7 @@ class FeedViewController: UIViewController {
     
     @objc
     func onButtonTap() {
-        parentNavigationController?.pushViewController(PostViewController(.orange), animated: true)
+        parentNavigationController?.pushViewController(PostViewController(), animated: true)
     }
 
     @objc
