@@ -104,7 +104,7 @@ final class LogInViewController: UIViewController {
                     self.createNewUser()
                 } else {
                     print(error)
-                    self.showAlert(alertTitle: .signUpError, errorCode: error.code)
+                    self.showAlert(alertTitle: "SING_UP_ERROR".localized, errorCode: error.code)
                 }
             }
         }
@@ -120,7 +120,7 @@ final class LogInViewController: UIViewController {
                 self.openProfileVC()
             case .failure(let error):
                 print(error)
-                self.showAlert(alertTitle: .signInError, errorCode: error.code)
+                self.showAlert(alertTitle: "SIGN_IN_ERROR".localized, errorCode: error.code)
             }
         }
     }
@@ -136,7 +136,7 @@ final class LogInViewController: UIViewController {
         let message = getAlertMessage(errorCode: errorCode)
 
         let alertController = UIAlertController(title: alertTitle, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: String.alertAction, style: .default, handler: nil)
+        let action = UIAlertAction(title: "ALERT_ACTION".localized, style: .default, handler: nil)
         alertController.addAction(action)
 
         present(alertController, animated: true)
@@ -145,30 +145,17 @@ final class LogInViewController: UIViewController {
     private func getAlertMessage(errorCode: Int) -> String {
         switch errorCode {
         case .shortPasswordErrorCode:
-            return .shortPassword
+            return "SHORT_PASSWORD".localized
         case .noSuchUserErrorCode:
-            return .noSuchUserError
+            return "NO_SUCH_USER_ERROR".localized
         case .invalidEmailAddressErrorCode:
-            return .invalidEmailAddress
+            return "INVALIDATE_EMAIL".localized
         case .wrongCredsErrorCode:
-            return .wrongCredsError
+            return "WRONG_CREDS_ERROR".localized
         default:
-            return .errorMessage
+            return "ERROR_MESSAGE".localized
         }
     }
-}
-
-private extension String {
-    static let signUpError = "Ошибка авторизации"
-    static let wrongCredsError = "Введенные вами логин или пароль неверные"
-    static let noSuchUserError =  "Пользователь не найден. Проверьте правильность логина или зарегистрируйтесь"
-
-    static let signInError = "Ошибка регистрации"
-    static let shortPassword = "Пароль должен содержать как минимум 6 символов"
-
-    static let alertAction = "Повторить"
-    static let errorMessage = "Произошла ошибка. Повторите позже"
-    static let invalidEmailAddress = "Некорректный формат email. Убедитесь, что email соответствует формату example@ex.com"
 }
 
 private extension Int {

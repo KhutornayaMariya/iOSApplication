@@ -16,7 +16,7 @@ final class FavoritesViewController: UIViewController {
     private lazy var searchController: UISearchController = {
         let view = UISearchController(searchResultsController: nil)
 
-        view.searchBar.searchTextField.placeholder = .authorName
+        view.searchBar.searchTextField.placeholder = "AUTHOR_NAME".localized
         view.searchResultsUpdater = self
 
         return view
@@ -132,8 +132,4 @@ extension FavoritesViewController: NSFetchedResultsControllerDelegate {
             print("Fatal error")
         }
     }
-}
-
-private extension String {
-    static let authorName = "Имя автора"
 }
