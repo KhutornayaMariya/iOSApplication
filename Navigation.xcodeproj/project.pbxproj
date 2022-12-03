@@ -26,6 +26,7 @@
 		4542CDF6291E7C8D000C95DB /* PostModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542CDF5291E7C8D000C95DB /* PostModelFactory.swift */; };
 		4548F323292299BE00AEEF59 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F322292299BE00AEEF59 /* Post.swift */; };
 		454FDE2928EC6A5F000F8986 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454FDE2828EC6A5F000F8986 /* ProfileViewModel.swift */; };
+		4570ECEE293B90740093BFE8 /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4570ECED293B90740093BFE8 /* LocalAuthorizationService.swift */; };
 		4572E3DD2938D439001AA01D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4572E3DF2938D439001AA01D /* Localizable.strings */; };
 		4572E3E12938D443001AA01D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4572E3E32938D443001AA01D /* InfoPlist.strings */; };
 		4572E3E72938D866001AA01D /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4572E3E62938D866001AA01D /* String+Extensions.swift */; };
@@ -118,6 +119,7 @@
 		4542CDF5291E7C8D000C95DB /* PostModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModelFactory.swift; sourceTree = "<group>"; };
 		4548F322292299BE00AEEF59 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		454FDE2828EC6A5F000F8986 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		4570ECED293B90740093BFE8 /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
 		4572E3E02938D43C001AA01D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4572E3E42938D447001AA01D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4572E3E62938D866001AA01D /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -459,6 +461,7 @@
 				45CA0726290E4DCA009D0815 /* FirebaseAuthorization.swift */,
 				45CA0720290D5F2E009D0815 /* CheckerService.swift */,
 				45CA0722290D5F51009D0815 /* CheckerServiceProtocol.swift */,
+				4570ECED293B90740093BFE8 /* LocalAuthorizationService.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -720,6 +723,7 @@
 				45229FB92884386700EF150F /* PostModel.swift in Sources */,
 				4542CDEA291BED7F000C95DB /* FavoritesViewController.swift in Sources */,
 				4542CDF2291D5128000C95DB /* CoreDataManager.swift in Sources */,
+				4570ECEE293B90740093BFE8 /* LocalAuthorizationService.swift in Sources */,
 				458198BC28EB2C1C00A5C852 /* RootTabBarViewController.swift in Sources */,
 				45D3105F2725B6120034F6A2 /* InfoView.swift in Sources */,
 				458198C528EB312F00A5C852 /* MainCoordinator.swift in Sources */,

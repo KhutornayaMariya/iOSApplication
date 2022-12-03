@@ -12,6 +12,7 @@ final class LogInViewController: UIViewController {
     private typealias firebaseAuth = FirebaseAuthorization.auth
     private let nc = NotificationCenter.default
     private var firebaseAuthHandle: FirebaseAuthorization.listener?
+    private let localAuthService = LocalAuthorizationService()
 
     private lazy var loginDelegate: LoginViewControllerDelegate = LoginInspector()
 
@@ -20,6 +21,7 @@ final class LogInViewController: UIViewController {
 
         view.translatesAutoresizingMaskIntoConstraints = false
         view.onTapButtonHandler = saveCredsToRealm
+        view.onTapBiometryButtonHandler = biometryAuth
 
         return view
     }()
@@ -61,6 +63,7 @@ final class LogInViewController: UIViewController {
     private func setUp() {
         view.backgroundColor = .systemBackground
         view.addSubview(loginView)
+        loginView.setUpBioAuthButton(isHidden: !localAuthService.isBiometricAuthEnabled)
 
         NSLayoutConstraint.activate([
             loginView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -88,6 +91,15 @@ final class LogInViewController: UIViewController {
         AuthorizationModel.defaultModel.addCredential(login: loginView.getLogin(), password: loginView.getPassword())
         openProfileVC()
         navigationController?.tabBarController?.viewControllers = RootTabBarViewController().reloadViewControllers()
+    }
+
+    @objc
+    private func biometryAuth() {
+        localAuthService.authorizeIfPossible { result in
+            if result == true {
+                self.openProfileVC()
+            }
+        }
     }
 
     @objc

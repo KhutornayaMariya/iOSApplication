@@ -7,3 +7,4 @@
  */
 
 "NSLocationWhenInUseUsageDescription" = "Чтобы показывать Ваш маршрут";
+"NSFaceIDUsageDescription" = "Использовать FaceID для авторизации";
