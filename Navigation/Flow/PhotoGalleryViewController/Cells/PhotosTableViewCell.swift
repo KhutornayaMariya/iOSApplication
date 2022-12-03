@@ -15,7 +15,7 @@ final class PhotosTableViewCell: UITableViewCell {
         view.textColor = .black
         view.font = .systemFont(ofSize: 24, weight: .bold)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.text = "Photos"
+        view.text = "PHOTO".localized
 
         return view
     }()

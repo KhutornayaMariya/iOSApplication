@@ -1,0 +1,37 @@
+/* 
+  Localizable.strings
+  Navigation
+
+  Created by m.khutornaya on 01.12.2022.
+  
+*/
+
+"LAUNCH_TEXT" = "NETOLOGY COURSE";
+
+"AUTHOR_NAME" = "Имя автора";
+
+"SING_UP_ERROR" = "Ошибка авторизации";
+"WRONG_CREDS_ERROR" = "Введенные вами логин или пароль неверные";
+"NO_SUCH_USER_ERROR" =  "Пользователь не найден. Проверьте правильность логина или зарегистрируйтесь";
+
+"SIGN_IN_ERROR" = "Ошибка регистрации";
+"SHORT_PASSWORD" = "Пароль должен содержать как минимум 6 символов";
+
+"ALERT_ACTION" = "Повторить";
+"ERROR_MESSAGE" = "Произошла ошибка. Повторите позже";
+"INVALIDATE_EMAIL" = "Некорректный формат email. Убедитесь, что email соответствует формату example@ex.com";
+
+"PHOTO" = "Фотографии";
+
+"NEWS" = "Новости";
+"PROFILE" = "Профиль";
+"FAVORITES" = "Любимое";
+
+"SHOW_STATUS" = "Show status";
+"MOOD_QUESTION" = "What is your mood?";
+"GREETINGS" = "Hi everyone";
+
+"MOOD_ALERT_TITLE" = "How are you today?";
+"MOOD_ALERT_MESSAGE" = "Tracker of your mood";
+"GOOD_MOOD" = "I'am OK";
+"BAD_MOOD" = "Not so good";

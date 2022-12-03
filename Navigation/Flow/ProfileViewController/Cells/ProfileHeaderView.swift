@@ -9,7 +9,7 @@ import UIKit
 
 final class ProfileHeaderView: UIView {
 
-    private var statusText: String = "Hi everyone"
+    private var statusText: String = "GREETINGS".localized
 
     private lazy var userName: UILabel = {
         let view = UILabel()
@@ -35,7 +35,7 @@ final class ProfileHeaderView: UIView {
     }()
 
     private lazy var statusButton: CustomButton = {
-        let view = CustomButton(title: "Show status", titleColor: .white)
+        let view = CustomButton(title: "SHOW_STATUS".localized, titleColor: .white)
 
         view.backgroundColor = .systemBlue
         view.layer.cornerRadius = 4
@@ -62,7 +62,7 @@ final class ProfileHeaderView: UIView {
     private lazy var inputField: UITextField = {
         let view = UITextField()
 
-        view.placeholder = "What is your mood?"
+        view.placeholder = "MOOD_QUESTION".localized
         view.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         view.textColor = .black
         view.backgroundColor = .white

@@ -23,12 +23,12 @@ class InfoViewController: UIViewController {
     }()
     
     private lazy var alert: UIAlertController = {
-        let alert = UIAlertController(title: .alertTitle, message: .alertMessage, preferredStyle: .alert)
-        let positive = UIAlertAction(title: .alertPositiveText, style: .default) { UIAlertAction in
-            print(String.alertPositiveText)
+        let alert = UIAlertController(title: "MOOD_ALERT_TITLE".localized, message: "MOOD_ALERT_MESSAGE".localized, preferredStyle: .alert)
+        let positive = UIAlertAction(title: "GOOD_MOOD".localized, style: .default) { UIAlertAction in
+            print("GOOD_MOOD".localized)
         }
-        let negative = UIAlertAction(title: .alertNegativeText, style: .default) { UIAlertAction in
-            print(String.alertNegativeText)
+        let negative = UIAlertAction(title: "BAD_MOOD".localized, style: .default) { UIAlertAction in
+            print("BAD_MOOD".localized)
         }
         
         alert.addAction(negative)
@@ -124,11 +124,6 @@ class InfoViewController: UIViewController {
 }
 
 private extension String {
-    static let alertTitle: String = "How are you today?"
-    static let alertMessage: String = "Tracker of your mood"
-    static let alertPositiveText: String = "I'am OK"
-    static let alertNegativeText: String = "Not so good"
-    
     static let url: String = "https://jsonplaceholder.typicode.com/todos/"
     static let planetUrl: String = "https://swapi.dev/api/planets/1"
 }

@@ -30,14 +30,14 @@ class InfoView: UIView {
     }()
 
     private lazy var residentsButton: CustomButton = {
-        let button = CustomButton(title: .residentsButtonText, titleColor: .blue)
+        let button = CustomButton(title: "RESIDENTS_BUTTON".localized, titleColor: .blue)
         button.backgroundColor = .white
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     private lazy var button: CustomButton = {
-        let button = CustomButton(title: .buttonText, titleColor: .blue)
+        let button = CustomButton(title: "TAP_BUTTON".localized, titleColor: .blue)
         button.backgroundColor = .white
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -110,9 +110,4 @@ class InfoView: UIView {
 private extension CGFloat {
     static let width: CGFloat = 200
     static let height: CGFloat = 100
-}
-
-private extension String {
-    static let buttonText = "Tap here"
-    static let residentsButtonText = "Show planet residents"
 }

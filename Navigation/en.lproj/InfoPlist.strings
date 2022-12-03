@@ -1,0 +1,9 @@
+/*
+ InfoPlist.string.strings
+ Navigation
+
+ Created by m.khutornaya on 01.12.2022.
+
+ */
+
+"NSLocationWhenInUseUsageDescription" = "Чтобы показывать Ваш маршрут";

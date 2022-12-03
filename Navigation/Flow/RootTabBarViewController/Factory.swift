@@ -30,9 +30,9 @@ final class Factory {
         switch flow {
         case .feed:
             let feedCoordinator = FeedCoordinator()
-            let controller = FeedViewController(.systemGray6, "News", parent: navigationController)
+            let controller = FeedViewController(.systemGray6, "NEWS".localized, parent: navigationController)
             feedCoordinator.navController = navigationController
-            navigationController.tabBarItem = UITabBarItem(title: "News", image: UIImage(systemName: "doc"),
+            navigationController.tabBarItem = UITabBarItem(title: "NEWS".localized, image: UIImage(systemName: "doc"),
                                                            selectedImage: UIImage(systemName: "doc.fill"))
             navigationController.setViewControllers([controller], animated: true)
         case .profile:
@@ -42,14 +42,14 @@ final class Factory {
             let controller = isAuthorized ? ProfileViewController(viewModel: model) : LogInViewController()
 
             profileCoordinator.navController = navigationController
-            navigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "house"),
+            navigationController.tabBarItem = UITabBarItem(title: "PROFILE".localized, image: UIImage(systemName: "house"),
                                                            selectedImage: UIImage(systemName: "house.fill"))
             navigationController.setViewControllers([controller], animated: true)
         case .favorites:
             let favoritesCoordinator = FavoritesCoordinator()
             let controller = FavoritesViewController()
             favoritesCoordinator.navController = navigationController
-            navigationController.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart"),
+            navigationController.tabBarItem = UITabBarItem(title: "FAVORITES".localized, image: UIImage(systemName: "heart"),
                                                            selectedImage: UIImage(systemName: "heart.fill"))
             navigationController.setViewControllers([controller], animated: true)
         }
