@@ -53,7 +53,7 @@ class LoginView: UIView {
         let view = UITextField()
 
         view.placeholder = "Phone or email"
-        view.textColor = .black
+        view.textColor = .label
         view.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         view.autocapitalizationType = .none
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -67,7 +67,7 @@ class LoginView: UIView {
         let view = UITextField()
 
         view.placeholder = "Password"
-        view.textColor = .black
+        view.textColor = .label
         view.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         view.autocapitalizationType = .none
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -116,7 +116,7 @@ class LoginView: UIView {
     }
 
     private func setUp() {
-        backgroundColor = .white
+        backgroundColor = .clear
         addSubview(scrollView)
         scrollView.addSubview(contentView)
 

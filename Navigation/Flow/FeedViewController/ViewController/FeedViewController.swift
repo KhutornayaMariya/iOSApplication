@@ -12,12 +12,9 @@ class FeedViewController: UIViewController {
     weak var parentNavigationController: UINavigationController?
     let model: FeedModel = FeedModel()
     let mainView: FeedView = FeedView()
-    
-    var backgroundColor: UIColor = .white
-    
-    init(_ color: UIColor, _ title: String, parent parentNavigationController: UINavigationController) {
+
+    init(_ title: String, parent parentNavigationController: UINavigationController) {
         super.init(nibName: nil, bundle: nil)
-        backgroundColor = color
         self.title = title
         self.parentNavigationController = parentNavigationController
     }
@@ -31,7 +28,7 @@ class FeedViewController: UIViewController {
         self.view = mainView
         mainView.setButtonTapAction(action: onButtonTap)
         mainView.setCheckGuessButtonTapAction(action: onCheckGuessButtonTap)
-        view.backgroundColor = backgroundColor
+        view.backgroundColor = .systemBackground
     }
     
     override func viewDidLoad() {
@@ -48,9 +45,9 @@ class FeedViewController: UIViewController {
         let result = model.check(mainView.getInputText())
 
         if result {
-            mainView.setLabelColor(.green)
+            mainView.setLabelColor(.systemGreen)
         } else {
-            mainView.setLabelColor(.red)
+            mainView.setLabelColor(.systemRed)
         }
     }
 }

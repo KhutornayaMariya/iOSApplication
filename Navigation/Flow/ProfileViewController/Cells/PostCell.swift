@@ -21,7 +21,7 @@ final class PostCell: UITableViewCell {
         let view = UILabel()
 
         view.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        view.textColor = .black
+        view.textColor = .label
         view.numberOfLines = 2
         view.translatesAutoresizingMaskIntoConstraints = false
 
@@ -32,7 +32,7 @@ final class PostCell: UITableViewCell {
         let view = UIImageView()
 
         view.contentMode = .scaleAspectFill
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         view.translatesAutoresizingMaskIntoConstraints = false
 
         return view
@@ -53,7 +53,7 @@ final class PostCell: UITableViewCell {
         let view = UILabel()
 
         view.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        view.textColor = .black
+        view.textColor = .label
         view.translatesAutoresizingMaskIntoConstraints = false
 
         return view
@@ -64,7 +64,7 @@ final class PostCell: UITableViewCell {
 
         view.contentMode = .scaleAspectFit
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.tintColor = .red
+        view.tintColor = .systemRed
 
         return view
     }()
@@ -73,7 +73,7 @@ final class PostCell: UITableViewCell {
         let view = UILabel()
 
         view.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        view.textColor = .black
+        view.textColor = .label
         view.translatesAutoresizingMaskIntoConstraints = false
 
         return view
@@ -98,7 +98,7 @@ final class PostCell: UITableViewCell {
     }
 
     private func setup() {
-        backgroundColor = .white
+        backgroundColor = .clear
         let subviews = [title, image, desc, likes, views, heart]
         subviews.forEach { addSubview($0) }
         let screenWidth = UIScreen.main.bounds.size.width

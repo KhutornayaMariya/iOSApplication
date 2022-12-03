@@ -39,7 +39,7 @@ class PostViewController: UIViewController {
     }
 
     private func setUp() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         setUpNavigationBar()
 
         view.addSubview(mapView)

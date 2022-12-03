@@ -30,7 +30,6 @@ final class FavoritesViewController: UIViewController {
         view.separatorStyle = .none
         view.rowHeight = UITableView.automaticDimension
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
         view.register(PostCell.self, forCellReuseIdentifier: String(describing: PostCell.self))
 
         return view
@@ -48,7 +47,7 @@ final class FavoritesViewController: UIViewController {
     }
 
     private func setUp() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         title = "Favorites"
         navigationItem.searchController = searchController
 
