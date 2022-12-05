@@ -45,6 +45,7 @@
 		45AD682B28E1F59500E44A20 /* UserServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AD682A28E1F59500E44A20 /* UserServiceProtocol.swift */; };
 		45AD682D28E1F5F300E44A20 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AD682C28E1F5F300E44A20 /* CurrentUserService.swift */; };
 		45AD682F28E2057400E44A20 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AD682E28E2057400E44A20 /* TestUserService.swift */; };
+		45BB8FE7293E0DFC006448E0 /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BB8FE6293E0DFC006448E0 /* LocalNotificationsService.swift */; };
 		45CA0708290D3770009D0815 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45CA0707290D3770009D0815 /* GoogleService-Info.plist */; };
 		45CA070B290D3978009D0815 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 45CA070A290D3978009D0815 /* FirebaseAnalytics */; };
 		45CA070D290D3978009D0815 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 45CA070C290D3978009D0815 /* FirebaseAuth */; };
@@ -141,6 +142,7 @@
 		45AD682A28E1F59500E44A20 /* UserServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceProtocol.swift; sourceTree = "<group>"; };
 		45AD682C28E1F5F300E44A20 /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
 		45AD682E28E2057400E44A20 /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
+		45BB8FE6293E0DFC006448E0 /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		45CA0707290D3770009D0815 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		45CA0716290D3C27009D0815 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		45CA0720290D5F2E009D0815 /* CheckerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerService.swift; sourceTree = "<group>"; };
@@ -447,6 +449,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		45BB8FE5293E0DE8006448E0 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				45BB8FE6293E0DFC006448E0 /* LocalNotificationsService.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 		45CA0718290D3C2C009D0815 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -492,6 +502,7 @@
 				45CA0719290D5605009D0815 /* Authorization */,
 				45AD682728E1F50800E44A20 /* UserService */,
 				45DFB8DB290AE24E00702567 /* Network */,
+				45BB8FE5293E0DE8006448E0 /* Notifications */,
 				458198B528EAC46A00A5C852 /* CustomView */,
 				45B19B3329223E34007E2A65 /* DataBase */,
 				45D31038272581B50034F6A2 /* AppDelegate.swift */,
@@ -717,6 +728,7 @@
 				458198B928EAE5BA00A5C852 /* FeedModel.swift in Sources */,
 				458198C028EB2E8B00A5C852 /* ProfileCoordinator.swift in Sources */,
 				45DFB8E5290BEAA000702567 /* PlanetModel.swift in Sources */,
+				45BB8FE7293E0DFC006448E0 /* LocalNotificationsService.swift in Sources */,
 				45CA0721290D5F2E009D0815 /* CheckerService.swift in Sources */,
 				45A72954288BE92200107918 /* ProfileRepository.swift in Sources */,
 				45CA0723290D5F51009D0815 /* CheckerServiceProtocol.swift in Sources */,
