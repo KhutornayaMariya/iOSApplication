@@ -15,7 +15,7 @@ final class ProfileHeaderView: UIView {
         let view = UILabel()
 
         view.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        view.textColor = .black
+        view.textColor = .label
         view.translatesAutoresizingMaskIntoConstraints = false
 
         return view
@@ -35,7 +35,7 @@ final class ProfileHeaderView: UIView {
     }()
 
     private lazy var statusButton: CustomButton = {
-        let view = CustomButton(title: "SHOW_STATUS".localized, titleColor: .white)
+        let view = CustomButton(title: "SHOW_STATUS".localized, titleColor: .label)
 
         view.backgroundColor = .systemBlue
         view.layer.cornerRadius = 4
@@ -53,7 +53,7 @@ final class ProfileHeaderView: UIView {
         let view = UILabel()
 
         view.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        view.textColor = .gray
+        view.textColor = .systemGray
         view.translatesAutoresizingMaskIntoConstraints = false
 
         return view
@@ -64,11 +64,11 @@ final class ProfileHeaderView: UIView {
 
         view.placeholder = "MOOD_QUESTION".localized
         view.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        view.textColor = .black
-        view.backgroundColor = .white
+        view.textColor = .label
+        view.backgroundColor = .systemBackground
         view.textAlignment = .left
         view.layer.cornerRadius = 12
-        view.layer.borderColor = UIColor.black.cgColor
+        view.layer.borderColor = UIColor.createColor(lightMode: .black, darkMode: .white).cgColor
         view.layer.borderWidth = 1
         view.translatesAutoresizingMaskIntoConstraints = false
         view.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)

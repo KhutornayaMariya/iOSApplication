@@ -65,7 +65,7 @@ class InfoViewController: UIViewController {
     }
     
     private func setUp() {
-        view.backgroundColor = .systemMint
+        view.backgroundColor = .systemBackground
         view.addSubview(infoView)
         
         NSLayoutConstraint.activate([

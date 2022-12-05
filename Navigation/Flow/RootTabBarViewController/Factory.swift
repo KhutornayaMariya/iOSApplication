@@ -30,7 +30,7 @@ final class Factory {
         switch flow {
         case .feed:
             let feedCoordinator = FeedCoordinator()
-            let controller = FeedViewController(.systemGray6, "NEWS".localized, parent: navigationController)
+            let controller = FeedViewController("NEWS".localized, parent: navigationController)
             feedCoordinator.navController = navigationController
             navigationController.tabBarItem = UITabBarItem(title: "NEWS".localized, image: UIImage(systemName: "doc"),
                                                            selectedImage: UIImage(systemName: "doc.fill"))

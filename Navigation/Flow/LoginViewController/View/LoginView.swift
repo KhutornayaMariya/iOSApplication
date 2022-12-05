@@ -53,7 +53,7 @@ class LoginView: UIView {
         let view = UITextField()
 
         view.placeholder = "Phone or email"
-        view.textColor = .black
+        view.textColor = .label
         view.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         view.autocapitalizationType = .none
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -67,7 +67,7 @@ class LoginView: UIView {
         let view = UITextField()
 
         view.placeholder = "Password"
-        view.textColor = .black
+        view.textColor = .label
         view.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         view.autocapitalizationType = .none
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -100,9 +100,27 @@ class LoginView: UIView {
         return view
     }()
 
+    private lazy var loginBiometryButton: CustomButton = {
+        let view = CustomButton(title: "Войти с помощью биометрии", titleColor: .white)
+
+        let image = UIImage(named: "blue_pixel")
+        view.setBackgroundImage(image, for: .normal)
+        view.layer.cornerRadius = 10
+        view.layer.masksToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        return view
+    }()
+
     public var onTapButtonHandler: (() -> Void)? {
         didSet {
             loginButton.addTarget(self, action: #selector(tapWrapper), for: .touchUpInside)
+        }
+    }
+
+    public var onTapBiometryButtonHandler: (() -> Void)? {
+        didSet {
+            loginBiometryButton.addTarget(self, action: #selector(tapBiometryWrapper), for: .touchUpInside)
         }
     }
 
@@ -116,11 +134,11 @@ class LoginView: UIView {
     }
 
     private func setUp() {
-        backgroundColor = .white
+        backgroundColor = .clear
         addSubview(scrollView)
         scrollView.addSubview(contentView)
 
-        let subviews = [logo, backgroundView, loginButton]
+        let subviews = [logo, backgroundView, loginButton, loginBiometryButton]
         subviews.forEach { contentView.addSubview($0) }
 
         [inputLoginField, inputPasswordField, separator].forEach { backgroundView.addSubview($0) }
@@ -153,7 +171,12 @@ class LoginView: UIView {
             loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .safeArea),
             loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.safeArea),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
-            loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+
+            loginBiometryButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: .safeArea),
+            loginBiometryButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .safeArea),
+            loginBiometryButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.safeArea),
+            loginBiometryButton.heightAnchor.constraint(equalToConstant: 50),
+            loginBiometryButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
 
             inputLoginField.topAnchor.constraint(equalTo: backgroundView.topAnchor),
             inputLoginField.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: .safeArea),
@@ -175,6 +198,11 @@ class LoginView: UIView {
     @objc
     private func tapWrapper() {
         self.onTapButtonHandler?()
+    }
+
+    @objc
+    private func tapBiometryWrapper() {
+        self.onTapBiometryButtonHandler?()
     }
 
     private func isInputsFilled() -> Bool {
@@ -205,6 +233,10 @@ extension LoginView {
 
     public func getPassword() -> String {
         return inputPasswordField.text!
+    }
+
+    public func setUpBioAuthButton(isHidden: Bool) {
+        loginBiometryButton.isHidden = isHidden
     }
 }
 

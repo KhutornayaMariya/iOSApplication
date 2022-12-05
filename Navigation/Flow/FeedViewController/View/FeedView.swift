@@ -10,7 +10,7 @@ import UIKit
 class FeedView: UIView {
     
     private var button: CustomButton = {
-        let button = CustomButton(title: "Button", titleColor: .black)
+        let button = CustomButton(title: "Button", titleColor: .label)
 
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 12
@@ -27,7 +27,7 @@ class FeedView: UIView {
         view.placeholder = "Guess the word"
         view.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         view.textColor = .black
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGray6
         view.textAlignment = .left
         view.layer.cornerRadius = 12
         view.layer.borderColor = UIColor.black.cgColor
@@ -38,7 +38,7 @@ class FeedView: UIView {
     }()
 
     private var checkGuessButton: CustomButton = {
-        let button = CustomButton(title: "Check", titleColor: .black)
+        let button = CustomButton(title: "Check", titleColor: .label)
 
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 12

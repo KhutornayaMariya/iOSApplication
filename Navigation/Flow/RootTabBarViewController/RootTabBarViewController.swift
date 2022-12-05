@@ -17,7 +17,7 @@ class RootTabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBar.backgroundColor = .white
+        tabBar.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .systemGray6)
         setControllers()
     }
 
